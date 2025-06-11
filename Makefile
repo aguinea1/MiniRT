@@ -1,0 +1,85 @@
+################################################################################
+#                              CONFIGURATION                                   #
+################################################################################
+
+NAME			= MiniRT
+#NAME_BONUS		= BonusRT
+
+CC				= cc
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
+DEPFLAGS		= -MMD -MF $(DEPDIR)/$*.d
+LDFLAGS			= -lreadline
+
+INCLUDE			= -Iinc -Ilibft -I/usr/include
+
+SRCDIR			= mandatory/src
+OBJDIR			= obj
+DEPDIR			= deps
+LIBFT_DIR		= libft
+INC_DIR			= mandatory/header
+
+################################################################################
+#                              SOURCE FILES                                    #
+################################################################################
+
+SRCS = $(SRCDIR)/main/main.c 			\
+	   $(SRCDIR)/parser/parser.c		\
+	   $(SRCDIR)/parser/parser_map.c	\
+	   $(SRCDIR)/utils/utils.c
+
+#SRCS_BONUS = \
+
+################################################################################
+#                             OBJECTS & DEPS                                   #
+################################################################################
+
+OBJS			= $(SRCS:%.c=$(OBJDIR)/%.o)
+#OBJS_BONUS		= $(SRCS_BONUS:%.c=$(OBJDIR)/%.o)
+DEPS			= $(OBJS:%.o=$(DEPDIR)/%.d)
+#DEPS_BONUS		= $(OBJS_BONUS:%.o=$(DEPDIR)/%.d)
+
+LIBFT_A			= $(LIBFT_DIR)/libft.a
+HEADERS			= $(INC_DIR)/minirt.h
+#HEADERS_BONUS	= inc/minishell_bonus.h libft/libft.h
+
+################################################################################
+#                              RULES                                           #
+################################################################################
+
+all: dir lib $(NAME)
+
+bonus: dir lib $(NAME_BONUS)
+
+$(NAME): Makefile $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS) -o $@
+	@echo "\033[1;33mMiniRT\033[0m"
+
+#$(NAME_BONUS): Makefile $(OBJS_BONUS)
+#	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_A) $(LDFLAGS) -o $@
+#	@echo "\033[1;33mMiniRT BonuS\033[0m"
+
+$(OBJDIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@) $(dir $(DEPDIR)/$*.d)
+	@$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDE) -c $< -o $@
+
+lib:
+	@make -C $(LIBFT_DIR) --silent
+
+dir:
+	@mkdir -p $(OBJDIR) $(DEPDIR)
+
+clean:
+	@make -C $(LIBFT_DIR) clean --silent
+	@rm -rf $(OBJDIR) $(DEPDIR)
+	@echo "\033[1;33mCHAU\033[0m"
+
+fclean: clean
+	@make -C $(LIBFT_DIR) fclean --silent
+	@rm -f $(NAME) $(NAME_BONUS)
+
+re: fclean all
+
+-include $(DEPS)
+-include $(DEPS_BONUS)
+
+.PHONY: all clean fclean re dir bonus
