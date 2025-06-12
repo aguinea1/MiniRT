@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:47:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 02:47:25 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 11:44:22 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	parse_sphere(char **tokens, t_scene *scene)
 	t_sphere	*sphere;
 	t_vec		center;
 
-	sphere = NULL;
 	if (num_args(tokens) != 4)
 		return (printf("Invalid number of Sphere arguments\n"), 0);
 	if (!parse_vec(tokens[1], &center))
@@ -57,6 +56,7 @@ int	parse_sphere(char **tokens, t_scene *scene)
 	rgb = parse_rgb(tokens[3]);
 	if (rgb == NULL)
 		return (0);
+	sphere = malloc(sizeof(t_sphere));
 	add_sphere(sphere, rgb, center, diameter);
 	free_array(rgb);
 	return (ft_lstadd_back(&scene->spheres, ft_lstnew(sphere)), 1);

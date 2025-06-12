@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:57:30 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 02:33:21 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:45:59 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	num_args(char **arr)
 {
 	int	len;
 
-	len = 0;
+	len = 1;
 	if (!arr)
 		return (0);
 	while (arr[len] != NULL)
@@ -69,14 +69,17 @@ static float	parse_number_part(const char *str, int *i)
 	result = 0.0f;
 	decimal = 0.0f;
 	divisor = 10.0f;
-	while (isdigit(str[*i++]))
+	(*i)--;
+	while (isdigit(str[++*i]))
 		result = result * 10.0f + (str[*i] - '0');
-	if (str[*i++] == '.')
+	if (str[*i] == '.')
 	{
-		while (isdigit(str[*i++]))
+		(*i)++;
+		while (isdigit(str[*i]))
 		{
 			decimal += (str[*i] - '0') / divisor;
 			divisor *= 10.0f;
+			(*i)++;
 		}
 	}
 	return (result + decimal);

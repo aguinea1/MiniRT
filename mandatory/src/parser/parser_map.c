@@ -6,37 +6,54 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:46:18 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 02:30:55 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 11:05:56 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
 
+static int	tab_for_space(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (line[0] == '#' || line[0] == '\0')
+		return (0);
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			line[i] = ' ';
+		i++;
+	}
+	return (1);
+}
+
 static int	parse_line(char *line, t_scene *scene)
 {
 	char	**tokens;
+	int		ret;
 
-	if (line[0] == '#' || line[0] == '\0')
+	ret = 0;
+	if (!tab_for_space(line))
 		return (1);
-	tokens = ft_split(line, '\t');
-	tokens = ft_split(line, ' ');
+	tokens = ft_split1(line, ' ');
 	if (!tokens)
 		return (printf("split failed\n"), 0);
 	if (ft_strcmp(tokens[0], "A") == 0)
-		return (parse_ambient(tokens, scene), free_array(tokens), 1);
+		ret = parse_ambient(tokens, scene);
 	else if (ft_strcmp(tokens[0], "C") == 0)
-		return (parse_camera(tokens, scene), free_array(tokens), 1);
+		ret = parse_camera(tokens, scene);
 	else if (ft_strcmp(tokens[0], "L") == 0)
-		return (parse_light(tokens, scene), free_array(tokens), 1);
+		ret = parse_light(tokens, scene);
 	else if (ft_strcmp(tokens[0], "sp") == 0)
-		return (parse_sphere(tokens, scene), free_array(tokens), 1);
+		ret = parse_sphere(tokens, scene);
 	else if (ft_strcmp(tokens[0], "pl") == 0)
-		return (parse_plane(tokens, scene), free_array(tokens), 1);
+		ret = parse_plane(tokens, scene);
 	else if (ft_strcmp(tokens[0], "cy") == 0)
-		return (parse_cylinder(tokens, scene), free_array(tokens), 1);
+		ret = parse_cylinder(tokens, scene);
 	else
 		printf("Error: Unknown identifier '%s'\n", tokens[0]);
-	return (free_array(tokens), 0);
+	return (free_array(tokens), ret);
 }
 
 static int	parse_get_line(int fd, t_scene *scene)
@@ -47,7 +64,7 @@ static int	parse_get_line(int fd, t_scene *scene)
 	while (line)
 	{
 		if (!parse_line(line, scene))
-			return (0);
+			return (free(line), 0);
 		free(line);
 		line = get_next_line(fd);
 	}

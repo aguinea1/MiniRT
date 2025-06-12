@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 02:55:18 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 11:05:32 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ float	ft_atof(const char *str);
 int		is_valid_rgb_value(char *str);
 int		vec_is_normalized(t_vec v);
 int		num_args(char **arr);
+char	**ft_split1(char const *s, char c);
 #endif

@@ -32,7 +32,8 @@ SRCS = $(SRCDIR)/main/main.c 				\
 	   $(SRCDIR)/parser/parse_plane.c		\
 	   $(SRCDIR)/parser/parse_sphere.c		\
 	   $(SRCDIR)/utils/utils2.c				\
-	   $(SRCDIR)/parser/parse_cylinder.c
+	   $(SRCDIR)/parser/parse_cylinder.c	\
+	   $(SRCDIR)/utils/utils3.c
 
 #SRCS_BONUS = \
 
