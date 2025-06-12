@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:46:18 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/11 21:34:28 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 02:30:55 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	parse_line(char *line, t_scene *scene)
 
 	if (line[0] == '#' || line[0] == '\0')
 		return (1);
-	tokens = ft_split(line, " \t");
+	tokens = ft_split(line, '\t');
+	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (printf("split failed\n"), 0);
 	if (ft_strcmp(tokens[0], "A") == 0)
@@ -60,7 +61,7 @@ int	parser_map(char *file, t_scene *scene)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (printf("open failed\n"), 0);
-	if (parse_line(fd, scene))
+	if (parse_get_line(fd, scene))
 		return (1);
 	return (0);
 }

@@ -6,17 +6,17 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:07:25 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/10 16:07:55 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 03:01:11 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_freejoin_bonus(char *buffer, char *buff)
+static char	*ft_freejoin_bonus(char *buffer, char *buff)
 {
 	char	*f_buffer;
 
-	f_buffer = ft_strjoin_bonus(buffer, buff);
+	f_buffer = ft_strjoin(buffer, buff);
 	if (f_buffer == NULL)
 	{
 		free (buff);
@@ -26,21 +26,21 @@ char	*ft_freejoin_bonus(char *buffer, char *buff)
 	return (f_buffer);
 }
 
-char	*read_byte_bonus(int fd, char *buff)
+static char	*read_byte_bonus(int fd, char *buff)
 {
 	char	*new_buff;
 	int		byte_read;
 
 	byte_read = 1;
 	if (!buff)
-		buff = ft_calloc_bonus(1, 1);
+		buff = ft_calloc(1, 1);
 	new_buff = (char *)malloc((BUFFER_SIZE + 2) * sizeof(char));
 	if (!new_buff)
 	{
 		free (buff);
 		return (NULL);
 	}
-	while (byte_read > 0 && !ft_strchr_bonus(buff, '\n'))
+	while (byte_read > 0 && !ft_strchr(buff, '\n'))
 	{
 		byte_read = read(fd, new_buff, BUFFER_SIZE);
 		if (byte_read < 0)
@@ -52,7 +52,7 @@ char	*read_byte_bonus(int fd, char *buff)
 	return (buff);
 }
 
-char	*ft_rest_bonus(char *buffer)
+static char	*ft_rest_bonus(char *buffer)
 {
 	int		i;
 	char	*rest;
@@ -66,7 +66,7 @@ char	*ft_rest_bonus(char *buffer)
 		i++;
 	if (buffer[i] == '\0')
 		return (free(buffer), NULL);
-	rest = (char *)malloc((ft_strlen_bonus(buffer) - i) + 1 * sizeof(char));
+	rest = (char *)malloc((ft_strlen(buffer) - i) + 1 * sizeof(char));
 	if (!rest)
 	{
 		free(buffer);
@@ -78,7 +78,7 @@ char	*ft_rest_bonus(char *buffer)
 	return (free (buffer), rest);
 }
 
-char	*print_line_bonus(char *line)
+static char	*print_line_bonus(char *line)
 {
 	int		i;
 	char	*f_line;

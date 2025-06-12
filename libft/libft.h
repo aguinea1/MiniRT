@@ -6,7 +6,7 @@
 /*   By: aguinea <aguinea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 21:07:16 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/10 16:09:10 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 03:02:30 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+# define BUFFER_SIZE 42
+# define OPEN_MAX 1000
 
 typedef struct s_list
 {
@@ -80,8 +82,4 @@ char	*ft_strcpy(char *dest, char *src);
 char	*ft_strcat(char *dest, char *src);
 int		ft_issigneddigit(char *str);
 char	*get_next_line(int fd);
-char	*print_line_bonus(char *line);
-char	*ft_rest_bonus(char *buffer);
-char	*read_byte_bonus(int fd, char *buff);
-char	*ft_freejoin_bonus(char *buffer, char *buff);
 #endif

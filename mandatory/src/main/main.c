@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:21:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/11 21:33:14 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 02:23:02 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	main(int ac, char **av)
 {
 	t_scene	scene;
 
-	scene = NULL;
 	if (ac == 2)
 	{
-		if (parsing(av, &scene))
-			init_rt(av, &scene);
+		if (parser(av, &scene))
+			write(1, "ok", 2);
+			//init_rt(av, &scene);
 	}
 	return (0);
 }

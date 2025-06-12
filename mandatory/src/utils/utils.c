@@ -6,11 +6,11 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:57:30 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/11 22:02:03 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/12 02:33:21 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minirt.h"
+#include "../../header/minirt.h"
 
 void	free_array(char **array)
 {
@@ -38,8 +38,9 @@ int	num_args(char **arr)
 
 int	is_valid_float(const char *str)
 {
-	int has_dot = 0;
+	int	has_dot;
 
+	has_dot = 0;
 	if (!str || !*str)
 		return (0);
 	if (*str == '+' || *str == '-')
@@ -59,15 +60,35 @@ int	is_valid_float(const char *str)
 	return (1);
 }
 
+static float	parse_number_part(const char *str, int *i)
+{
+	float	result;
+	float	decimal;
+	float	divisor;
+
+	result = 0.0f;
+	decimal = 0.0f;
+	divisor = 10.0f;
+	while (isdigit(str[*i++]))
+		result = result * 10.0f + (str[*i] - '0');
+	if (str[*i++] == '.')
+	{
+		while (isdigit(str[*i++]))
+		{
+			decimal += (str[*i] - '0') / divisor;
+			divisor *= 10.0f;
+		}
+	}
+	return (result + decimal);
+}
 
 float	ft_atof(const char *str)
 {
-	float	result = 0.0f;
-	float	decimal = 0.0f;
-	float	divisor = 10.0f;
-	int		sign = 1;
-	int		i = 0;
+	int	i;
+	int	sign;
 
+	i = 0;
+	sign = 1;
 	while (isspace(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -76,15 +97,5 @@ float	ft_atof(const char *str)
 			sign = -1;
 		i++;
 	}
-	while (isdigit(str[i++]))
-		result = result * 10.0f + (str[i] - '0');
-	if (str[i++] == '.')
-	{
-		while (isdigit(str[i++]))
-		{
-			decimal += (str[i] - '0') / divisor;
-			divisor *= 10.0f;
-		}
-	}
-	return (sign * (result + decimal));
+	return (sign * parse_number_part(str, &i));
 }

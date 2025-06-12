@@ -22,10 +22,17 @@ INC_DIR			= mandatory/header
 #                              SOURCE FILES                                    #
 ################################################################################
 
-SRCS = $(SRCDIR)/main/main.c 			\
-	   $(SRCDIR)/parser/parser.c		\
-	   $(SRCDIR)/parser/parser_map.c	\
-	   $(SRCDIR)/utils/utils.c
+SRCS = $(SRCDIR)/main/main.c 				\
+	   $(SRCDIR)/parser/parser.c			\
+	   $(SRCDIR)/parser/parser_map.c		\
+	   $(SRCDIR)/utils/utils.c				\
+	   $(SRCDIR)/parser/parse_camera.c		\
+	   $(SRCDIR)/parser/parse_ambient.c	\
+	   $(SRCDIR)/parser/parse_light.c		\
+	   $(SRCDIR)/parser/parse_plane.c		\
+	   $(SRCDIR)/parser/parse_sphere.c		\
+	   $(SRCDIR)/utils/utils2.c				\
+	   $(SRCDIR)/parser/parse_cylinder.c
 
 #SRCS_BONUS = \
 

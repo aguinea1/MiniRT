@@ -6,7 +6,7 @@
 #    By: aguinea <aguinea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 17:09:23 by aguinea           #+#    #+#              #
-#    Updated: 2025/04/16 17:12:25 by aguinea          ###   ########.fr        #
+#    Updated: 2025/06/12 02:58:27 by aguinea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,11 +61,8 @@ SRCS =  ft_isascii.c \
 	ft_strcpy.c \
 	ft_strcat.c \
 	ft_issigneddigit.c \
-	ft_printf.c type_cs.c type_num.c type_xXp.c ft_realloc.c
-
-
-BSRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+	ft_printf.c type_cs.c type_num.c type_xXp.c ft_realloc.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
