@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 15:21:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 12:33:01 by aguinea          ###   ########.fr       */
+/*   Created: 2025/06/13 11:53:31 by aguinea           #+#    #+#             */
+/*   Updated: 2025/06/13 12:38:48 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
 
-static t_scene scene_init(void)
+static void	delete(void *content)
 {
-	t_scene scene;
-	
-	scene.spheres = NULL;
-	scene.planes = NULL;
-	scene.cylinders = NULL;
-	return (scene);
+	free(content);
 }
 
-int	main(int ac, char **av)
+static void	my_clear(t_list **lst, void (*del)(void *))
 {
-	t_scene	scene;
+	t_list	*tmp;
 
-	if (ac == 2)
+	if (!lst || !del)
+		return;
+
+	while (*lst)
 	{
-		scene = scene_init();
-		if (parser(av, &scene))
-		{
-			write(1, "ok", 2);
-		//	init_rt(av, &scene);
-			free_all(&scene.cylinders, &scene.planes, &scene.spheres);
-		}
+		tmp = (*lst)->next;
+		delete((*lst)->content);
+		free(*lst);
+		*lst = tmp;
 	}
-	return (0);
+	*lst = NULL;
 }
+
+void	free_all(t_list **cyl, t_list **plane, t_list **sphere)
+{
+	my_clear(sphere, delete);
+	my_clear(plane, delete);
+	my_clear(cyl, delete);
+}
+

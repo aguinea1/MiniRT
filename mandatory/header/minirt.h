@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 11:05:32 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:28:14 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,7 @@ int		is_valid_rgb_value(char *str);
 int		vec_is_normalized(t_vec v);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
+
+//FINISH
+void	free_all(t_list **cyl, t_list **plane, t_list **sphere);
 #endif

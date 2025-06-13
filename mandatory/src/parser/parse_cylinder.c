@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 01:46:17 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 03:05:39 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/13 11:51:28 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,20 @@ int	parse_cylinder(char **tokens, t_scene *scene)
 	t_cylinder	*cyl;
 	t_vec		position;
 	t_vec		orientation;
-	float		diam_he;
 	char		**rgb;
 
-	cyl = NULL;
 	if (!check_args_pos_or(tokens, &position, &orientation))
 		return (0);
-	diam_he = ft_atof(tokens[3]);
-	if (diam_he <= 0)
+	if (ft_atof(tokens[3]) <= 0)
 		return (printf("Cylinder diameter must be positive\n"), 0);
-	cyl->diameter = diam_he;
-	diam_he = ft_atof(tokens[4]);
-	if (diam_he <= 0)
+	if (ft_atof(tokens[4]) <= 0)
 		return (printf("Cylinder height must be positive\n"), 0);
 	rgb = parse_rgb(tokens[5]);
 	if (!rgb)
 		return (0);
 	cyl = malloc(sizeof(t_cylinder));
-	cyl->height = diam_he;
+	cyl->height = ft_atof(tokens[4]);
+	cyl->diameter = ft_atof(tokens[3]);
 	add_cyl(cyl, position, orientation, rgb);
 	return (free_array(rgb),
 		ft_lstadd_back(&scene->cylinders, ft_lstnew(cyl)), 1);

@@ -6,11 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 01:13:06 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 11:06:20 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/13 11:19:02 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../..//header/minirt.h"
+#include "../../header/minirt.h"
+#include <math.h>
 
 static int	is_numeric(char *str)
 {

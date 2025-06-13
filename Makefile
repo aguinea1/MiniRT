@@ -8,7 +8,7 @@ NAME			= MiniRT
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 DEPFLAGS		= -MMD -MF $(DEPDIR)/$*.d
-LDFLAGS			= -lreadline
+LDFLAGS			= -lm
 
 INCLUDE			= -Iinc -Ilibft -I/usr/include
 
@@ -27,13 +27,14 @@ SRCS = $(SRCDIR)/main/main.c 				\
 	   $(SRCDIR)/parser/parser_map.c		\
 	   $(SRCDIR)/utils/utils.c				\
 	   $(SRCDIR)/parser/parse_camera.c		\
-	   $(SRCDIR)/parser/parse_ambient.c	\
+	   $(SRCDIR)/parser/parse_ambient.c		\
 	   $(SRCDIR)/parser/parse_light.c		\
 	   $(SRCDIR)/parser/parse_plane.c		\
 	   $(SRCDIR)/parser/parse_sphere.c		\
 	   $(SRCDIR)/utils/utils2.c				\
 	   $(SRCDIR)/parser/parse_cylinder.c	\
-	   $(SRCDIR)/utils/utils3.c
+	   $(SRCDIR)/utils/utils3.c				\
+	   $(SRCDIR)/finish/free_all.c
 
 #SRCS_BONUS = \
 
