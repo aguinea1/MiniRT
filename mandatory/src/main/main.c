@@ -6,16 +6,16 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:21:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 12:33:01 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:47:33 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
 
-static t_scene scene_init(void)
+static t_scene	scene_init(void)
 {
-	t_scene scene;
-	
+	t_scene	scene;
+
 	scene.spheres = NULL;
 	scene.planes = NULL;
 	scene.cylinders = NULL;

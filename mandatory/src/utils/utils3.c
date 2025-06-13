@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:58:27 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 11:06:57 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:46:33 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,3 @@ char	**ft_split1(char const *s, char c)
 		return (NULL);
 	return (token_v);
 }
-

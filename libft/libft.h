@@ -6,7 +6,7 @@
 /*   By: aguinea <aguinea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 21:07:16 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 12:04:51 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:45:07 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void    del(void *content);
+void	del(void *content);
 void	ft_free_int_array(int **array, int size);
 size_t	ft_strcspn(const char *s, const char *reject);
 size_t	ft_strspn(const char *s, const char *accept);
