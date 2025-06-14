@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:47:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 11:41:36 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/14 04:13:12 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ char	**parse_rgb(char *rgb1)
 
 	rgb = ft_split(rgb1, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		return (free_array(rgb), printf("Invalid sphere color format\n"), NULL);
+		return (free_array(rgb), printf("Error\nInvalid sphere color format\n"),
+			NULL);
 	if (!is_valid_rgb_value(rgb[0])
 		|| !is_valid_rgb_value(rgb[1])
 		|| !is_valid_rgb_value(rgb[2]))
 		return (free_array(rgb),
-			printf("Sphere RGB values must be 0–255\n"), NULL);
+			printf("Error\nSphere RGB values must be 0–255\n"), NULL);
 	return (rgb);
 }
 
@@ -45,14 +46,14 @@ int	parse_sphere(char **tokens, t_scene *scene)
 	t_vec		center;
 
 	if (num_args(tokens) != 4)
-		return (printf("Invalid number of Sphere arguments\n"), 0);
+		return (printf("Error\nInvalid number of Sphere arguments\n"), 0);
 	if (!parse_vec(tokens[1], &center))
-		return (printf("Invalid sphere center vector\n"), 0);
+		return (printf("Error\nInvalid sphere center vector\n"), 0);
 	if (!is_valid_float(tokens[2]))
-		return (printf("Invalid sphere diameter\n"), 0);
+		return (printf("Error\nInvalid sphere diameter\n"), 0);
 	diameter = ft_atof(tokens[2]);
 	if (diameter <= 0)
-		return (printf("Sphere diameter must be positive\n"), 0);
+		return (printf("Error\nSphere diameter must be positive\n"), 0);
 	rgb = parse_rgb(tokens[3]);
 	if (rgb == NULL)
 		return (0);

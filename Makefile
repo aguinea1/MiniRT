@@ -15,8 +15,10 @@ INCLUDE			= -Iinc -Ilibft -I/usr/include
 SRCDIR			= mandatory/src
 OBJDIR			= obj
 DEPDIR			= deps
-LIBFT_DIR		= libft
+LIBFT_DIR		= libs/libft
 INC_DIR			= mandatory/header
+MLXDIR			= libs/MLX42
+MLX				= $(MLXDIR)/build/libmlx42.a -ldl -lglfw -lm
 
 ################################################################################
 #                              SOURCE FILES                                    #
@@ -34,7 +36,9 @@ SRCS = $(SRCDIR)/main/main.c 				\
 	   $(SRCDIR)/utils/utils2.c				\
 	   $(SRCDIR)/parser/parse_cylinder.c	\
 	   $(SRCDIR)/utils/utils3.c				\
-	   $(SRCDIR)/finish/free_all.c
+	   $(SRCDIR)/finish/free_all.c			\
+	   $(SRCDIR)/mlx/run_mlx.c				\
+	   $(SRCDIR)/mlx/mlx_init.c
 
 #SRCS_BONUS = \
 
@@ -55,12 +59,12 @@ HEADERS			= $(INC_DIR)/minirt.h
 #                              RULES                                           #
 ################################################################################
 
-all: dir lib $(NAME)
+all: dir lib mlx $(NAME)
 
 bonus: dir lib $(NAME_BONUS)
 
 $(NAME): Makefile $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX) $(LDFLAGS) -o $@
 	@echo "\033[1;33mMiniRT\033[0m"
 
 #$(NAME_BONUS): Makefile $(OBJS_BONUS)
@@ -77,6 +81,10 @@ lib:
 dir:
 	@mkdir -p $(OBJDIR) $(DEPDIR)
 
+mlx:
+	@cmake -S $(MLXDIR) -B $(MLXDIR)/build > /dev/null 2>&1
+	@cmake --build $(MLXDIR)/build > /dev/null 2>&1
+
 clean:
 	@make -C $(LIBFT_DIR) clean --silent
 	@rm -rf $(OBJDIR) $(DEPDIR)
@@ -85,6 +93,7 @@ clean:
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean --silent
 	@rm -f $(NAME) $(NAME_BONUS)
+	@rm -rf $(MLXDIR)/build
 
 re: fclean all
 

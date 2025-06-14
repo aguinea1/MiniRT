@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 01:27:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 02:13:12 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/14 04:14:09 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ int	parse_plane(char **tokens, t_scene *scene)
 	char	**rgb;
 
 	if (num_args(tokens) != 4)
-		return (printf("Plane must have 3 arguments\n"), 0);
+		return (printf("Error\nPlane must have 3 arguments\n"), 0);
 	if (!parse_vec(tokens[1], &position))
-		return (printf("Invalid plane position vector\n"), 0);
+		return (printf("Error\nInvalid plane position vector\n"), 0);
 	if (!parse_vec(tokens[2], &normal))
-		return (printf("Invalid plane normal vector\n"), 0);
+		return (printf("Error\nInvalid plane normal vector\n"), 0);
 	if (!vec_is_normalized(normal))
-		return (printf("Plane normal vector must be in range [-1, 1]\n"), 0);
+		return (printf("Error\nPlane normal vector must be in range [-1, 1]\n"),
+			0);
 	rgb = parse_rgb(tokens[3]);
 	if (!rgb)
 		return (0);

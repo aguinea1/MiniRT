@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 12:28:14 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/14 04:06:43 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <ctype.h> 
 # include <stdio.h>
 # include <math.h>
-# include "../../libft/libft.h"
+# include "../../libs/libft/libft.h"
+# include "../../libs/MLX42/include/MLX42/MLX42.h"
+# define WIDTH 1280
+# define HEIGHT 720
 
 //STRUCTS
 typedef struct s_vec
@@ -81,6 +84,16 @@ typedef struct s_scene
 	t_list		*cylinders;
 }	t_scene;
 
+typedef struct s_mlx
+{
+	mlx_t		*init;
+	int			window_height;
+	int			window_width;
+	mlx_image_t	*image;
+	mlx_image_t	*mini_image;
+
+}				t_mlx;
+
 //PARSER
 int		parser(char **av, t_scene *scene);
 int		parser_map(char *file, t_scene *scene);
@@ -102,6 +115,14 @@ int		is_valid_rgb_value(char *str);
 int		vec_is_normalized(t_vec v);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
+
+//MLX
+int		run_mlx(void);
+int		init_mlx(t_mlx *mlx);
+int		create_new_images(t_mlx *mlx);
+int		put_image_to_window(t_mlx *mlx);
+void	close_window(t_mlx *mlx);
+void	key_call(mlx_key_data_t keydata, void *param);
 
 //FINISH
 void	free_all(t_list **cyl, t_list **plane, t_list **sphere);
