@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:21:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/14 04:16:43 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/30 14:58:29 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int	main(int ac, char **av)
 		scene = scene_init();
 		if (parser(av, &scene))
 		{
-			run_mlx();
+			run_mlx();//&scene);
 			free_all(&scene.cylinders, &scene.planes, &scene.spheres);
 		}
 	}
+	else
+		write (1, "invalid args\n", 13);
 	return (0);
 }

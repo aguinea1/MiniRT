@@ -6,7 +6,7 @@ NAME			= MiniRT
 #NAME_BONUS		= BonusRT
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g #-fsanitize=address
 DEPFLAGS		= -MMD -MF $(DEPDIR)/$*.d
 LDFLAGS			= -lm
 

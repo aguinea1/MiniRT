@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/14 04:06:43 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:19:56 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <math.h>
 # include "../../libs/libft/libft.h"
 # include "../../libs/MLX42/include/MLX42/MLX42.h"
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 4480
+# define HEIGHT 2520
 
 //STRUCTS
 typedef struct s_vec

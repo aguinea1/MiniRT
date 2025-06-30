@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 02:52:14 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/14 04:04:48 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:26:52 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	create_new_images(t_mlx *mlx)
 	int	mini_width;
 	int	mini_height;
 
-	mini_width = 200;
-	mini_height = 200;
+	mini_width = 4480;
+	mini_height = 2520;
 	mlx->image = mlx_new_image(mlx->init,
 			mlx->window_width, mlx->window_height);
 	printf ("window: %d, %d\n", mlx->window_width, mlx->window_height);
