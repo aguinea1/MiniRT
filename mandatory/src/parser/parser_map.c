@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:46:18 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 11:05:56 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/30 18:30:56 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,21 @@ static int	tab_for_space(char *line)
 	return (1);
 }
 
+static int	parse_line_bonus(t_scene *scene, int ret, char **tokens)
+{
+	if (ft_strcmp(tokens[0], "co") == 0)
+		ret = parse_cone(tokens, scene);
+	else if (ret == -1)
+		printf("Error: Unknown identifier '%s'\n", tokens[0]);
+	return (ret);
+}
+
 static int	parse_line(char *line, t_scene *scene)
 {
 	char	**tokens;
 	int		ret;
 
-	ret = 0;
+	ret = -1;
 	if (!tab_for_space(line))
 		return (1);
 	tokens = ft_split1(line, ' ');
@@ -51,8 +60,7 @@ static int	parse_line(char *line, t_scene *scene)
 		ret = parse_plane(tokens, scene);
 	else if (ft_strcmp(tokens[0], "cy") == 0)
 		ret = parse_cylinder(tokens, scene);
-	else
-		printf("Error: Unknown identifier '%s'\n", tokens[0]);
+	ret = parse_line_bonus(scene, ret, tokens);
 	return (free_array(tokens), ret);
 }
 

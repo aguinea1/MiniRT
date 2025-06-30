@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:47:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/14 04:13:12 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/06/30 20:26:56 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,27 @@ static void	add_sphere(t_sphere *sphere, char **rgb,
 	sphere->color.z = (float)atoi(rgb[2]);
 }
 
+static int	print_errors(char **tokens, t_vec *center)
+{
+	if (num_args(tokens) < 4)
+		return (printf("Error\nInvalid number of Sphere arguments\n"), 0);
+	if (!parse_vec(tokens[1], center))
+		return (printf("Error\nInvalid sphere center vector\n"), 0);
+	if (!is_valid_float(tokens[2]))
+		return (printf("Error\nInvalid sphere diameter\n"), 0);
+	return (1);
+}
+
 int	parse_sphere(char **tokens, t_scene *scene)
 {
 	char		**rgb;
 	float		diameter;
 	t_sphere	*sphere;
 	t_vec		center;
+	int			pattern;
 
-	if (num_args(tokens) != 4)
-		return (printf("Error\nInvalid number of Sphere arguments\n"), 0);
-	if (!parse_vec(tokens[1], &center))
-		return (printf("Error\nInvalid sphere center vector\n"), 0);
-	if (!is_valid_float(tokens[2]))
-		return (printf("Error\nInvalid sphere diameter\n"), 0);
+	if (!print_errors(tokens, &center))
+		return (0);
 	diameter = ft_atof(tokens[2]);
 	if (diameter <= 0)
 		return (printf("Error\nSphere diameter must be positive\n"), 0);
@@ -59,6 +67,11 @@ int	parse_sphere(char **tokens, t_scene *scene)
 		return (0);
 	sphere = malloc(sizeof(t_sphere));
 	add_sphere(sphere, rgb, center, diameter);
-	free_array(rgb);
-	return (ft_lstadd_back(&scene->spheres, ft_lstnew(sphere)), 1);
+	pattern = parse_bonus(tokens, "sphere");
+	if (pattern == -1)
+		return (free_array(rgb), ft_lstadd_back(&scene->spheres,
+				ft_lstnew(sphere)), 0);
+	sphere->pattern = pattern;
+	return (free_array(rgb),
+		ft_lstadd_back(&scene->spheres, ft_lstnew(sphere)), 1);
 }

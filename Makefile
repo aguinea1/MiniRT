@@ -6,7 +6,7 @@ NAME			= MiniRT
 #NAME_BONUS		= BonusRT
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 DEPFLAGS		= -MMD -MF $(DEPDIR)/$*.d
 LDFLAGS			= -lm
 
@@ -38,7 +38,10 @@ SRCS = $(SRCDIR)/main/main.c 				\
 	   $(SRCDIR)/utils/utils3.c				\
 	   $(SRCDIR)/finish/free_all.c			\
 	   $(SRCDIR)/mlx/run_mlx.c				\
-	   $(SRCDIR)/mlx/mlx_init.c
+	   $(SRCDIR)/mlx/mlx_init.c				\
+	   $(SRCDIR)/parser/parse_cone.c		\
+	   $(SRCDIR)/parser/parse_bonus.c	
+
 
 #SRCS_BONUS = \
 

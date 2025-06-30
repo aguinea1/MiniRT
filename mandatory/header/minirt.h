@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/18 14:19:56 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:33:01 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,20 @@
 # include "../../libs/MLX42/include/MLX42/MLX42.h"
 # define WIDTH 4480
 # define HEIGHT 2520
+# define CHECKER_P "checker"
+# define STRIPE_P "stripe"
+# define NOISE_P "noise"
 
 //STRUCTS
+
+typedef enum e_pattern
+{
+	NONE,
+	CHECKER,
+	STRIPE,
+	NOISE
+}	t_pattern;
+
 typedef struct s_vec
 {
 	float	x;
@@ -53,26 +65,39 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_vec	center;
-	float	diameter;
-	t_vec	color;
+	t_vec		center;
+	float		diameter;
+	t_vec		color;
+	t_pattern	pattern;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_vec	position;
-	t_vec	normal;
-	t_vec	color;
+	t_vec		position;
+	t_vec		normal;
+	t_vec		color;
+	t_pattern	pattern;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec	position;
-	t_vec	orientation;
-	float	diameter;
-	float	height;
-	t_vec	color;
+	t_vec		position;
+	t_vec		orientation;
+	float		diameter;
+	float		height;
+	t_vec		color;
+	t_pattern	pattern;
 }	t_cylinder;
+
+typedef struct s_cone
+{
+	t_vec		position;
+	t_vec		direction;
+	float		height;
+	float		angle;
+	t_vec		color;
+	t_pattern	pattern;
+}	t_cone;
 
 typedef struct s_scene
 {
@@ -82,6 +107,7 @@ typedef struct s_scene
 	t_list		*spheres;
 	t_list		*planes;
 	t_list		*cylinders;
+	t_list		*cones;
 }	t_scene;
 
 typedef struct s_mlx
@@ -106,6 +132,8 @@ int		parse_ambient(char **tokens, t_scene *scene);
 char	**parse_rgb(char *rgb1);
 int		parse_plane(char **tokens, t_scene *scene);
 int		parse_cylinder(char **tokens, t_scene *scene);
+int		parse_bonus(char **tokens, char *figure);
+int		parse_cone(char **tokens, t_scene *scene);
 
 //UTILS
 void	free_array(char **array);
