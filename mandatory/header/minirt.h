@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/30 20:33:01 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/05 13:10:10 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef struct s_vec
 	float	y;
 	float	z;
 }	t_vec;
+
+typedef struct s_ray 
+{
+    t_vec origin;
+    t_vec direction;
+}	t_ray;
 
 typedef struct s_ambient
 {
@@ -120,6 +126,12 @@ typedef struct s_mlx
 
 }				t_mlx;
 
+typedef struct s_hook_data
+{
+	t_mlx	*mlx;
+	t_scene	*scene;
+}	t_hook_data;
+
 //PARSER
 int		parser(char **av, t_scene *scene);
 int		parser_map(char *file, t_scene *scene);
@@ -140,17 +152,26 @@ void	free_array(char **array);
 int		is_valid_float(const char *str);
 float	ft_atof(const char *str);
 int		is_valid_rgb_value(char *str);
-int		vec_is_normalized(t_vec v);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
 
+//VEC OPERATIONS
+t_vec	vec_cross(t_vec a, t_vec b);
+t_vec	vec_add(t_vec a, t_vec b);
+t_vec	vec_sub(t_vec a, t_vec b);
+t_vec	vec_mult(t_vec a, double t);
+double	vec_dot(t_vec a, t_vec b);
+double	vec_length(t_vec v);
+int		vec_is_normalized(t_vec v);
+
 //MLX
-int		run_mlx(void);
+int		run_mlx(t_scene *scene);
 int		init_mlx(t_mlx *mlx);
 int		create_new_images(t_mlx *mlx);
 int		put_image_to_window(t_mlx *mlx);
 void	close_window(t_mlx *mlx);
 void	key_call(mlx_key_data_t keydata, void *param);
+void	calc_rays(t_mlx *mlx, t_scene *scene);
 
 //FINISH
 void	free_all(t_list **cyl, t_list **plane, t_list **sphere);

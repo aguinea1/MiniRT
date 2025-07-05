@@ -40,7 +40,12 @@ SRCS = $(SRCDIR)/main/main.c 				\
 	   $(SRCDIR)/mlx/run_mlx.c				\
 	   $(SRCDIR)/mlx/mlx_init.c				\
 	   $(SRCDIR)/parser/parse_cone.c		\
-	   $(SRCDIR)/parser/parse_bonus.c	
+	   $(SRCDIR)/parser/parse_bonus.c		\
+	   $(SRCDIR)/mlx/render_scene.c			\
+	   $(SRCDIR)/vec_op/vec_op1.c			\
+	   $(SRCDIR)/vec_op/vec_op2.c
+
+
 
 
 #SRCS_BONUS = \

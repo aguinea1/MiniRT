@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 01:13:06 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 11:19:02 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/04 15:54:29 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,4 @@ int	is_valid_rgb_value(char *str)
 		return (0);
 	value = atoi(str);
 	return (value >= 0 && value <= 255);
-}
-
-int	vec_is_normalized(t_vec v)
-{
-	float	length;
-
-	length = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
-	if (fabsf(length - 1.0f) < 0.0001f)
-		return (1);
-	return (0);
 }

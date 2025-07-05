@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   vec_op2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 15:21:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/01 12:51:54 by aguinea          ###   ########.fr       */
+/*   Created: 2025/07/04 15:53:20 by aguinea           #+#    #+#             */
+/*   Updated: 2025/07/04 15:54:09 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
+#include <math.h>
 
-static t_scene	scene_init(void)
+int	vec_is_normalized(t_vec v)
 {
-	t_scene	scene;
+	float	length;
 
-	scene.spheres = NULL;
-	scene.planes = NULL;
-	scene.cylinders = NULL;
-	return (scene);
+	length = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+	if (fabsf(length - 1.0f) < 0.0001f)
+		return (1);
+	return (0);
 }
 
-int	main(int ac, char **av)
+double	vec_length(t_vec v) 
 {
-	t_scene	scene;
-
-	if (ac == 2)
-	{
-		scene = scene_init();
-		if (parser(av, &scene))
-			run_mlx(&scene);
-		free_all(&scene.cylinders, &scene.planes, &scene.spheres);
-	}
-	else
-		write (1, "invalid args\n", 13);
-	return (0);
+	return sqrt(vec_dot(v, v));
 }
