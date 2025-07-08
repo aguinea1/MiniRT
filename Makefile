@@ -7,6 +7,7 @@ NAME			= MiniRT
 
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
+THFLAGS			= -lpthread
 DEPFLAGS		= -MMD -MF $(DEPDIR)/$*.d
 LDFLAGS			= -lm
 
@@ -44,7 +45,8 @@ SRCS = $(SRCDIR)/main/main.c 					\
 	   $(SRCDIR)/render/render_scene.c			\
 	   $(SRCDIR)/vec_op/vec_op1.c				\
 	   $(SRCDIR)/vec_op/vec_op2.c				\
-	   $(SRCDIR)/render/utils_render_scene.c	
+	   $(SRCDIR)/render/utils_render_scene.c	\
+	   $(SRCDIR)/threads/init_threads.c
 
 
 
@@ -73,7 +75,7 @@ all: dir lib mlx $(NAME)
 bonus: dir lib $(NAME_BONUS)
 
 $(NAME): Makefile $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX) $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX) $(LDFLAGS) $(THFLAGS) -o $@
 	@echo "\033[1;33mMiniRT\033[0m"
 
 #$(NAME_BONUS): Makefile $(OBJS_BONUS)

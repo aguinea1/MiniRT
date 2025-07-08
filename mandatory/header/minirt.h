@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/08 13:28:58 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:28:11 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <ctype.h> 
 # include <stdio.h>
 # include <math.h>
+# include <pthread.h>
 # include "../../libs/libft/libft.h"
 # include "../../libs/MLX42/include/MLX42/MLX42.h"
 # define WIDTH 4480
@@ -25,6 +26,7 @@
 # define CHECKER_P "checker"
 # define STRIPE_P "stripe"
 # define NOISE_P "noise"
+# define THREADS 12
 
 //STRUCTS
 
@@ -132,6 +134,15 @@ typedef struct s_hook_data
 	t_scene	*scene;
 }	t_hook_data;
 
+typedef struct s_thread_data 
+{
+	t_scene *scene;
+	t_vec *views;
+	t_mlx *mlx;
+	int y_start;
+	int y_end;
+} t_thread_data;
+
 //PARSER
 int		parser(char **av, t_scene *scene);
 int		parser_map(char *file, t_scene *scene);
@@ -158,7 +169,7 @@ char	**ft_split1(char const *s, char c);
 
 //RENDER
 t_vec	vec_scale(t_vec v, double scalar);
-void	render_loop(t_scene *scene, t_vec *views, t_mlx *mlx);
+void	*render_loop(void *data);
 void	calc_rays(t_mlx *mlx, t_scene *scene);
 void	put_pixel(t_mlx *mlx, int x, int y, int r, int g, int b);
 t_vec	ray_color(t_vec dir, t_scene *scene);
@@ -169,6 +180,8 @@ void	camera_ref(t_scene	*scene, t_vec *ref);
 void	viewport_calc(t_scene *scene, double *viewport);
 void	space_viewport(t_scene *scene, double *viewport, t_vec	*ref, t_vec *v);
 
+//THREADS
+void	init_th_struct(t_scene *scene, t_vec *views, t_mlx *mlx, int *coor, t_thread_data *th);
 
 //VEC OPERATIONS
 t_vec	vec_cross(t_vec a, t_vec b);

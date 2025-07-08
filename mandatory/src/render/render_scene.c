@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:00:22 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/08 13:37:23 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:32:56 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,42 +45,74 @@ void put_pixel(t_mlx *mlx, int x, int y, int r, int g, int b)
     pixel[3] = 255; // alpha
 }
 
-void	render_loop(t_scene *scene, t_vec *views, t_mlx *mlx)
+void	*render_loop(void *data)
 {
 	int		i;
 	int		j;
 	double	st[2];
 	t_vec	dir;
 	t_vec	color;
+	t_thread_data *th = (t_thread_data *)data;
 
-	j = 0;
-	while (++j < HEIGHT) 
+	j = th->y_start;
+	while (j++ < th->y_end) 
 	{
 		i = 0;
-		while (++i < WIDTH) 
+		while (i++ < WIDTH) 
 		{
 			st[0] = (double)i / (WIDTH - 1);
 			st[1] = (double)(HEIGHT - j - 1) / (HEIGHT - 1);
-			dir = vec_sub(vec_add(vec_add(views[2], vec_scale(views[0], st[0])),
-					vec_scale(views[1], st[1])),scene->camera.position);
+			dir = vec_sub(vec_add(vec_add(th->views[2], vec_scale(th->views[0], st[0])),
+					vec_scale(th->views[1], st[1])), th->scene->camera.position);
 			dir = vec_normalize(dir);
-			color = ray_color(dir, scene);
-			// Aqui va el calculo de las figuras
-			put_pixel(mlx,i, j, rr, gg, bb);
+			color = ray_color(dir, th->scene);
+			int rr = (int)(fmin(color.x, 1.0) * 255.999);
+			int gg = (int)(fmin(color.y, 1.0) * 255.999);
+			int bb = (int)(fmin(color.z, 1.0) * 255.999);
+			put_pixel(th->mlx,i, j, rr, gg, bb);
 		}
 	}
+	return (NULL);
 }
+
+static void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx)
+{
+	pthread_t		threads[THREADS];
+	t_thread_data	th[THREADS];
+	int				thread_lines;
+	int				i;
+	int				coor[2];
+
+	i = -1;
+	thread_lines = HEIGHT / THREADS;
+	while (++i < THREADS)
+	{
+		coor[0] = i * thread_lines;
+		if (i + 1 == THREADS)
+			coor[1] = HEIGHT;
+		else
+			coor[1] = coor[0] + thread_lines;
+		init_th_struct(scene, views, mlx, coor, &th[i]);
+		pthread_create(&threads[i], NULL, render_loop, (void *)&th[i]);
+	}
+	i = 0;
+	while (i < THREADS)
+		pthread_join(threads[i++], NULL);
+}
+
 
 void	calc_rays(t_mlx *mlx, t_scene *scene)
 {
-	double	viewport[2];
-	t_vec	ref[3];
-	t_vec	view_space[3];
+	double			viewport[2];
+	t_vec			ref[3];
+	t_vec			view_space[3];
 
 	camera_ref(scene, ref);
 	viewport_calc(scene, viewport);
 	space_viewport(scene, viewport, ref, view_space);
-	render_loop(scene, view_space, mlx);
+	create_threads(scene, view_space, mlx);
+//	render_loop(scene, view_space, mlx);
+	//y aqui matarlos??
     mlx_image_to_window(mlx->init, mlx->image, 0, 0);
 }
 
