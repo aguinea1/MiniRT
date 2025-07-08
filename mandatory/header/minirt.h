@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/05 13:10:10 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:28:58 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,21 @@ int		is_valid_rgb_value(char *str);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
 
+
+//RENDER
+t_vec	vec_scale(t_vec v, double scalar);
+void	render_loop(t_scene *scene, t_vec *views, t_mlx *mlx);
+void	calc_rays(t_mlx *mlx, t_scene *scene);
+void	put_pixel(t_mlx *mlx, int x, int y, int r, int g, int b);
+t_vec	ray_color(t_vec dir, t_scene *scene);
+t_vec	vec_normalize(t_vec v);
+t_vec	vec(double x, double y, double z);
+t_vec	vec_scale(t_vec v, double scalar);
+void	camera_ref(t_scene	*scene, t_vec *ref);
+void	viewport_calc(t_scene *scene, double *viewport);
+void	space_viewport(t_scene *scene, double *viewport, t_vec	*ref, t_vec *v);
+
+
 //VEC OPERATIONS
 t_vec	vec_cross(t_vec a, t_vec b);
 t_vec	vec_add(t_vec a, t_vec b);
@@ -171,7 +186,6 @@ int		create_new_images(t_mlx *mlx);
 int		put_image_to_window(t_mlx *mlx);
 void	close_window(t_mlx *mlx);
 void	key_call(mlx_key_data_t keydata, void *param);
-void	calc_rays(t_mlx *mlx, t_scene *scene);
 
 //FINISH
 void	free_all(t_list **cyl, t_list **plane, t_list **sphere);

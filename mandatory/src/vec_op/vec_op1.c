@@ -6,19 +6,11 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:47:57 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/04 21:35:16 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:04:04 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
-static t_vec vec(double x, double y, double z) {
-    t_vec result;
-    result.x = x;
-    result.y = y;
-    result.z = z;
-    return result;
-}
 
 t_vec	vec_add(t_vec a, t_vec b) 
 {

@@ -24,26 +24,27 @@ MLX				= $(MLXDIR)/build/libmlx42.a -ldl -lglfw -lm
 #                              SOURCE FILES                                    #
 ################################################################################
 
-SRCS = $(SRCDIR)/main/main.c 				\
-	   $(SRCDIR)/parser/parser.c			\
-	   $(SRCDIR)/parser/parser_map.c		\
-	   $(SRCDIR)/utils/utils.c				\
-	   $(SRCDIR)/parser/parse_camera.c		\
-	   $(SRCDIR)/parser/parse_ambient.c		\
-	   $(SRCDIR)/parser/parse_light.c		\
-	   $(SRCDIR)/parser/parse_plane.c		\
-	   $(SRCDIR)/parser/parse_sphere.c		\
-	   $(SRCDIR)/utils/utils2.c				\
-	   $(SRCDIR)/parser/parse_cylinder.c	\
-	   $(SRCDIR)/utils/utils3.c				\
-	   $(SRCDIR)/finish/free_all.c			\
-	   $(SRCDIR)/mlx/run_mlx.c				\
-	   $(SRCDIR)/mlx/mlx_init.c				\
-	   $(SRCDIR)/parser/parse_cone.c		\
-	   $(SRCDIR)/parser/parse_bonus.c		\
-	   $(SRCDIR)/mlx/render_scene.c			\
-	   $(SRCDIR)/vec_op/vec_op1.c			\
-	   $(SRCDIR)/vec_op/vec_op2.c
+SRCS = $(SRCDIR)/main/main.c 					\
+	   $(SRCDIR)/parser/parser.c				\
+	   $(SRCDIR)/parser/parser_map.c			\
+	   $(SRCDIR)/utils/utils.c					\
+	   $(SRCDIR)/parser/parse_camera.c			\
+	   $(SRCDIR)/parser/parse_ambient.c			\
+	   $(SRCDIR)/parser/parse_light.c			\
+	   $(SRCDIR)/parser/parse_plane.c			\
+	   $(SRCDIR)/parser/parse_sphere.c			\
+	   $(SRCDIR)/utils/utils2.c					\
+	   $(SRCDIR)/parser/parse_cylinder.c		\
+	   $(SRCDIR)/utils/utils3.c					\
+	   $(SRCDIR)/finish/free_all.c				\
+	   $(SRCDIR)/mlx/run_mlx.c					\
+	   $(SRCDIR)/mlx/mlx_init.c					\
+	   $(SRCDIR)/parser/parse_cone.c			\
+	   $(SRCDIR)/parser/parse_bonus.c			\
+	   $(SRCDIR)/render/render_scene.c			\
+	   $(SRCDIR)/vec_op/vec_op1.c				\
+	   $(SRCDIR)/vec_op/vec_op2.c				\
+	   $(SRCDIR)/render/utils_render_scene.c	
 
 
 

@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:53:20 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/04 15:54:09 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:35:39 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,35 @@ int	vec_is_normalized(t_vec v)
 
 double	vec_length(t_vec v) 
 {
-	return sqrt(vec_dot(v, v));
+	return (sqrt(vec_dot(v, v)));
+}
+
+t_vec	vec_normalize(t_vec v) 
+{
+	double	len;
+
+	len = vec_length(v);
+	if (len == 0)
+		return vec(0, 0, 0);
+	return vec(v.x / len, v.y / len, v.z / len);
+}
+
+t_vec	vec_scale(t_vec v, double scalar)
+{
+	t_vec result;
+    
+	result.x = v.x * scalar;
+	result.y = v.y * scalar;
+	result.z = v.z * scalar;
+	return (result);
+}
+
+t_vec	vec(double x, double y, double z) 
+{
+	t_vec result;
+	
+	result.x = x;
+	result.y = y;
+	result.z = z;
+	return (result);
 }
