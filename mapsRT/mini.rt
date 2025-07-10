@@ -1,6 +1,6 @@
-A 0.2 255,255,255          # Ambient light: 20% brightness, white
-C 0,0,0 0,0,1 70           # Camera: position (0,0,0), looks in +Z, 70° FOV
-L 10,10,10 0.6 255,255,255 # Light: position (10,10,10), brightness 0.6, white
-sp 0,0,20 5 255,0,0        # Sphere: center (0,0,20), diameter 5, red
-pl 0,-5,0 0,1,0 0,255,0  checker   checker checker # Plane: position (0,-5,0), normal up (0,1,0), green
+A 0.2 255,255,255			# Ambient light: 20% brightness, white
+C 0,0,0 0,0,1 70			# Camera: position (0,0,0), looks in +Z, 70° FOV
+L 10,10,10 0.6 255,255,255	# Light: position (10,10,10), brightness 0.6, white
+sp 0,0,20 10 255,0,0		# Sphere: center (0,0,20), diameter 5, red
+pl 0,-5,0 0,1,0 0,255,0		# Plane: position (0,-5,0), normal up (0,1,0), green
 cy 5,0,20 0,1,0 2 6 0,0,255 stripe # Cylinder: center (5,0,20), axis (0,1,0), diameter 2, height 6, blue

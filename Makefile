@@ -46,9 +46,9 @@ SRCS = $(SRCDIR)/main/main.c 					\
 	   $(SRCDIR)/vec_op/vec_op1.c				\
 	   $(SRCDIR)/vec_op/vec_op2.c				\
 	   $(SRCDIR)/render/utils_render_scene.c	\
-	   $(SRCDIR)/threads/init_threads.c
-
-
+	   $(SRCDIR)/threads/init_threads.c			\
+	   $(SRCDIR)/render/hit_scene.c				\
+	   $(SRCDIR)/render/hit_sphere.c
 
 
 #SRCS_BONUS = \

@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/08 17:28:11 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:41:37 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_vec
 	float	z;
 }	t_vec;
 
-typedef struct s_ray 
+typedef struct s_ray
 {
-    t_vec origin;
-    t_vec direction;
+	t_vec	origin;
+	t_vec	direction;
 }	t_ray;
 
 typedef struct s_ambient
@@ -134,14 +134,23 @@ typedef struct s_hook_data
 	t_scene	*scene;
 }	t_hook_data;
 
-typedef struct s_thread_data 
+typedef struct s_thread_data
 {
-	t_scene *scene;
-	t_vec *views;
-	t_mlx *mlx;
-	int y_start;
-	int y_end;
-} t_thread_data;
+	t_scene	*scene;
+	t_vec	*views;
+	t_mlx	*mlx;
+	int		y_start;
+	int		y_end;
+}	t_thread_data;
+
+typedef struct s_hit
+{
+	double	t;
+	t_vec	point;
+	t_vec	normal;
+	t_vec	color;
+	int		hit;
+}	t_hit;
 
 //PARSER
 int		parser(char **av, t_scene *scene);
@@ -166,12 +175,10 @@ int		is_valid_rgb_value(char *str);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
 
-
 //RENDER
 t_vec	vec_scale(t_vec v, double scalar);
 void	*render_loop(void *data);
 void	calc_rays(t_mlx *mlx, t_scene *scene);
-void	put_pixel(t_mlx *mlx, int x, int y, int r, int g, int b);
 t_vec	ray_color(t_vec dir, t_scene *scene);
 t_vec	vec_normalize(t_vec v);
 t_vec	vec(double x, double y, double z);
@@ -179,9 +186,13 @@ t_vec	vec_scale(t_vec v, double scalar);
 void	camera_ref(t_scene	*scene, t_vec *ref);
 void	viewport_calc(t_scene *scene, double *viewport);
 void	space_viewport(t_scene *scene, double *viewport, t_vec	*ref, t_vec *v);
+void	put_pixel(t_mlx *mlx, int x, int y, int *rgb);
+t_vec	ray_color(t_vec dir, t_scene *scene);
+t_hit	find_closest_sphere(t_ray ray, t_list *spheres);
+t_hit	hit_sphere(t_ray ray, t_sphere *sphere);
 
 //THREADS
-void	init_th_struct(t_scene *scene, t_vec *views, t_mlx *mlx, int *coor, t_thread_data *th);
+void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);
 
 //VEC OPERATIONS
 t_vec	vec_cross(t_vec a, t_vec b);

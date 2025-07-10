@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 03:01:55 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/05 14:52:08 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/09 15:14:59 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,3 @@ int	run_mlx(t_scene *scene)
 	mlx_terminate(mlx.init);
 	return (0);
 }
-

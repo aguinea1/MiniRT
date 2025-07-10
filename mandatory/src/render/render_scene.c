@@ -6,100 +6,49 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:00:22 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/08 17:32:56 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:50:11 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
 
-t_vec ray_color(t_vec dir, t_scene *scene) 
+static void	rgb_to_putpixel(t_thread_data *th, double *st, int	*rgb)
 {
-    t_vec unit_direction;
-	t_ray	ray;
+	t_vec	dir;
+	t_vec	color;
 
-	ray.origin = scene->camera.position;
-	ray.direction = dir;
-	unit_direction = vec_normalize(ray.direction);
-    // Escala y para obtener valor t entre 0.0 (suelo) y 1.0 (cielo)
-    double t = 0.5 * (unit_direction.y + 1.0);
-
-    // Interpolación lineal: mezcla entre blanco y azul
-    t_vec white = (t_vec){1.0, 1.0, 1.0};   // RGB: blanco
-	t_vec blue = (t_vec){1.0, 0.5, 0.0};
-    t_vec result;
-    result.x = (1.0 - t) * white.x + t * blue.x;
-    result.y = (1.0 - t) * white.y + t * blue.y;
-    result.z = (1.0 - t) * white.z + t * blue.z;
-
-    return result;
-}
-
-void put_pixel(t_mlx *mlx, int x, int y, int r, int g, int b)
-{
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return;
-    unsigned char *pixel = &mlx->image->pixels[(y * WIDTH + x) * 4];
-    pixel[0] = b;
-    pixel[1] = g;
-    pixel[2] = r;
-    pixel[3] = 255; // alpha
+	dir = vec_sub(vec_add(vec_add(th->views[2], vec_scale(th->views[0], st[0])),
+				vec_scale(th->views[1], st[1])), th->scene->camera.position);
+	dir = vec_normalize(dir);
+	color = ray_color(dir, th->scene);
+	rgb[0] = (int)(fmin(color.x, 1.0) * 255.999);
+	rgb[1] = (int)(fmin(color.y, 1.0) * 255.999);
+	rgb[2] = (int)(fmin(color.z, 1.0) * 255.999);
 }
 
 void	*render_loop(void *data)
 {
-	int		i;
-	int		j;
-	double	st[2];
-	t_vec	dir;
-	t_vec	color;
-	t_thread_data *th = (t_thread_data *)data;
+	int				i;
+	int				j;
+	double			st[2];
+	t_thread_data	*th;
+	int				rgb[3];
 
+	th = (t_thread_data *)data;
 	j = th->y_start;
-	while (j++ < th->y_end) 
+	while (j++ < th->y_end)
 	{
 		i = 0;
-		while (i++ < WIDTH) 
+		while (i++ < WIDTH)
 		{
 			st[0] = (double)i / (WIDTH - 1);
 			st[1] = (double)(HEIGHT - j - 1) / (HEIGHT - 1);
-			dir = vec_sub(vec_add(vec_add(th->views[2], vec_scale(th->views[0], st[0])),
-					vec_scale(th->views[1], st[1])), th->scene->camera.position);
-			dir = vec_normalize(dir);
-			color = ray_color(dir, th->scene);
-			int rr = (int)(fmin(color.x, 1.0) * 255.999);
-			int gg = (int)(fmin(color.y, 1.0) * 255.999);
-			int bb = (int)(fmin(color.z, 1.0) * 255.999);
-			put_pixel(th->mlx,i, j, rr, gg, bb);
+			rgb_to_putpixel(th, st, rgb);
+			put_pixel(th->mlx, i, j, rgb);
 		}
 	}
 	return (NULL);
 }
-
-static void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx)
-{
-	pthread_t		threads[THREADS];
-	t_thread_data	th[THREADS];
-	int				thread_lines;
-	int				i;
-	int				coor[2];
-
-	i = -1;
-	thread_lines = HEIGHT / THREADS;
-	while (++i < THREADS)
-	{
-		coor[0] = i * thread_lines;
-		if (i + 1 == THREADS)
-			coor[1] = HEIGHT;
-		else
-			coor[1] = coor[0] + thread_lines;
-		init_th_struct(scene, views, mlx, coor, &th[i]);
-		pthread_create(&threads[i], NULL, render_loop, (void *)&th[i]);
-	}
-	i = 0;
-	while (i < THREADS)
-		pthread_join(threads[i++], NULL);
-}
-
 
 void	calc_rays(t_mlx *mlx, t_scene *scene)
 {
@@ -111,8 +60,5 @@ void	calc_rays(t_mlx *mlx, t_scene *scene)
 	viewport_calc(scene, viewport);
 	space_viewport(scene, viewport, ref, view_space);
 	create_threads(scene, view_space, mlx);
-//	render_loop(scene, view_space, mlx);
-	//y aqui matarlos??
-    mlx_image_to_window(mlx->init, mlx->image, 0, 0);
+	mlx_image_to_window(mlx->init, mlx->image, 0, 0);
 }
-
