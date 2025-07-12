@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/10 17:41:37 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/12 19:38:41 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,19 @@ typedef struct s_plane
 	t_pattern	pattern;
 }	t_plane;
 
+typedef struct s_cyl_data 
+{
+	t_vec axis;
+	t_vec oc;
+	t_vec d_proj;
+	t_vec oc_proj;
+	double a;
+	double b;
+	double c;
+	double disc;
+	double sqrt_disc;
+} t_cyl_data;
+
 typedef struct s_cylinder
 {
 	t_vec		position;
@@ -95,6 +108,7 @@ typedef struct s_cylinder
 	float		height;
 	t_vec		color;
 	t_pattern	pattern;
+	t_cyl_data	*data;
 }	t_cylinder;
 
 typedef struct s_cone
@@ -174,6 +188,8 @@ float	ft_atof(const char *str);
 int		is_valid_rgb_value(char *str);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
+void	evaluate_token(char **tokens);
+void remove_comment(char *line);
 
 //RENDER
 t_vec	vec_scale(t_vec v, double scalar);
@@ -190,6 +206,9 @@ void	put_pixel(t_mlx *mlx, int x, int y, int *rgb);
 t_vec	ray_color(t_vec dir, t_scene *scene);
 t_hit	find_closest_sphere(t_ray ray, t_list *spheres);
 t_hit	hit_sphere(t_ray ray, t_sphere *sphere);
+t_hit	hit_cylinder(t_ray ray, t_cylinder *cy);
+t_hit	find_closest_cylinder(t_ray ray, t_list *cyls);
+int setup_scene(t_scene *scene);
 
 //THREADS
 void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);
@@ -202,6 +221,7 @@ t_vec	vec_mult(t_vec a, double t);
 double	vec_dot(t_vec a, t_vec b);
 double	vec_length(t_vec v);
 int		vec_is_normalized(t_vec v);
+t_vec	vec_mul(t_vec a, t_vec b);
 
 //MLX
 int		run_mlx(t_scene *scene);

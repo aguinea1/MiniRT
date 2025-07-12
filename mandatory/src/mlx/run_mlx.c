@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 03:01:55 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/09 15:14:59 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/12 18:51:26 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	run_mlx(t_scene *scene)
 	if (!put_image_to_window(&mlx))
 		return (mlx_terminate(mlx.init), 1);
 	clear_image_black(mlx.image, mlx.window_width, mlx.window_height);
+	if (!setup_scene(scene))
+		return (mlx_terminate(mlx.init), 1);
 	calc_rays(&mlx, scene);
 	mlx_key_hook(mlx.init, key_call, &mlx);
 	mlx_loop(mlx.init);

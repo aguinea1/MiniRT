@@ -6,23 +6,28 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:46:18 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/30 18:30:56 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/12 18:25:31 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
 
-static int	tab_for_space(char *line)
+int	tab_for_space(char *line)
 {
 	int	i;
 
-	i = 0;
-	if (line[0] == '#' || line[0] == '\0')
+	if (!line || line[0] == '#' || line[0] == '\0')
 		return (0);
+	i = 0;
 	while (line[i])
 	{
 		if (line[i] == '\t')
 			line[i] = ' ';
+		else if (line[i] == '#')
+		{
+			line[i] = '\0'; // corta la línea en el comentario
+			break;
+		}
 		i++;
 	}
 	return (1);
@@ -32,6 +37,8 @@ static int	parse_line_bonus(t_scene *scene, int ret, char **tokens)
 {
 	if (ft_strcmp(tokens[0], "co") == 0)
 		ret = parse_cone(tokens, scene);
+	else if (ret == -1 && tokens[0][0] == '\n')
+		ret = 1;
 	else if (ret == -1)
 		printf("Error: Unknown identifier '%s'\n", tokens[0]);
 	return (ret);
@@ -43,6 +50,7 @@ static int	parse_line(char *line, t_scene *scene)
 	int		ret;
 
 	ret = -1;
+	remove_comment(line);
 	if (!tab_for_space(line))
 		return (1);
 	tokens = ft_split1(line, ' ');

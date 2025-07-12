@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:57:30 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/12 10:45:59 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/11 18:59:13 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ void	free_array(char **array)
 int	num_args(char **arr)
 {
 	int	len;
+	int	i;
 
-	len = 1;
+	i = 0;
+	len = 0;
 	if (!arr)
 		return (0);
-	while (arr[len] != NULL)
+	while (arr[i] != NULL)
+	{
+		i++;
 		len++;
+	}
 	return (len);
 }
 

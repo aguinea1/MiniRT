@@ -1,44 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   vec_op3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 01:13:06 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/11 18:29:26 by aguinea          ###   ########.fr       */
+/*   Created: 2025/07/12 19:37:07 by aguinea           #+#    #+#             */
+/*   Updated: 2025/07/12 19:37:27 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-#include <math.h>
 
-static int	is_numeric(char *str)
+t_vec	vec_mul(t_vec a, t_vec b)
 {
-	int	i;
+	t_vec result;
 
-	i = 0;
-	if (!str || !*str)
-		return (0);
-	if (str[0] == '-' || str[0] == '+')
-		i++;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_valid_rgb_value(char *str)
-{
-	int	value;
-
-	if (!str || !is_numeric(str))
-		return (0);
-	value = atoi(str);
-	if (value >= 0 && value <= 255)
-		return (1);
-	return (0);
+	result.x = a.x * b.x;
+	result.y = a.y * b.y;
+	result.z = a.z * b.z;
+	return (result);
 }

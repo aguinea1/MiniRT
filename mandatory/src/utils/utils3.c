@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:58:27 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 12:46:33 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/11 19:19:00 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,22 @@ static size_t	count_tokens(char const *s, char delimiter)
 static int	fill(char **token_v, char const *s, char delimiter)
 {
 	size_t	len;
-	int		position;
+	int		position = 0;
 
-	position = 0;
 	while (*s && *s != '#')
 	{
-		len = 0;
 		while (*s == delimiter && *s && *s != '#')
 			s++;
+		if (*s == '\0' || *s == '#')
+			break;
 		len = 0;
-		while (*s != delimiter && *s && *s != '#')
-		{
+		while (s[len] != delimiter && s[len] && s[len] != '#')
 			len++;
-			s++;
-		}
-		if (len)
-		{
-			if (safe_malloc(token_v, position, len + 1))
-				return (1);
-			ft_strlcpy(token_v[position], s - len, len + 1);
-			position++;
-		}
+		if (safe_malloc(token_v, position, len + 1))
+			return (1);
+		ft_strlcpy(token_v[position], s, len + 1);
+		s += len;
+		position++;
 	}
 	return (0);
 }
@@ -97,3 +92,18 @@ char	**ft_split1(char const *s, char c)
 		return (NULL);
 	return (token_v);
 }
+
+void	evaluate_token(char **tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+		i++;
+	if (i > 0 && !ft_isalnum(tokens[i - 1][0]))
+	{
+		free(tokens[i - 1]);
+		tokens[i - 1] = NULL;
+	}
+}
+

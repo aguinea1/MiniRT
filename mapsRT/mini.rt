@@ -1,6 +1,16 @@
-A 0.2 255,255,255			# Ambient light: 20% brightness, white
-C 0,0,0 0,0,1 70			# Camera: position (0,0,0), looks in +Z, 70° FOV
-L 10,10,10 0.6 255,255,255	# Light: position (10,10,10), brightness 0.6, white
-sp 0,0,20 10 255,0,0		# Sphere: center (0,0,20), diameter 5, red
-pl 0,-5,0 0,1,0 0,255,0		# Plane: position (0,-5,0), normal up (0,1,0), green
-cy 5,0,20 0,1,0 2 6 0,0,255 stripe # Cylinder: center (5,0,20), axis (0,1,0), diameter 2, height 6, blue
+# Cámara y luz
+C 0,0,10 0,0,-1 60                     # Cámara mirando hacia el eje Z negativo
+L 8,5,10 0.7 255,255,255             # Luz blanca intensa
+
+# Esferas (color azul oscuro)
+sp -2,0,2   1.0 0,0,139                # Esfera 1
+sp  2,1,-1  1.0 0,0,139                # Esfera 2
+sp  1,-1,3  1.0 0,0,139                # Esfera 3
+sp -3,0,-2  1.0 0,0,139                # Esfera 4
+
+# Cilindros (colores variados, orientación normalizada)
+cy  0,0,0   0,1,0   1.0 3.0  255,0,0   # Cilindro rojo vertical
+cy  3,0,0   0,1,0   1.0 2.0  0,255,0   # Cilindro verde vertical
+cy -3,0,0   0,1,0   0.5 1.5  0,0,255   # Cilindro azul vertical
+cy  0,0,-4  0.707,0,0.707  0.6 2.0  255,255,0  # Cilindro amarillo inclinado
+

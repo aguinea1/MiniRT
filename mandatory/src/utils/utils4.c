@@ -1,44 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 01:13:06 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/11 18:29:26 by aguinea          ###   ########.fr       */
+/*   Created: 2025/07/12 18:25:50 by aguinea           #+#    #+#             */
+/*   Updated: 2025/07/12 18:29:34 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-#include <math.h>
 
-static int	is_numeric(char *str)
+static char	*ft_strchr1(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
-	if (!str || !*str)
-		return (0);
-	if (str[0] == '-' || str[0] == '+')
-		i++;
-	while (str[i])
+	while (*s)
 	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	return (1);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
-int	is_valid_rgb_value(char *str)
+void remove_comment(char *line)
 {
-	int	value;
-
-	if (!str || !is_numeric(str))
-		return (0);
-	value = atoi(str);
-	if (value >= 0 && value <= 255)
-		return (1);
-	return (0);
+    char *p;
+	
+	p =  ft_strchr1(line, '#');
+    if (p)
+		*p = '\0';
 }
+

@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:59:45 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/30 20:31:44 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/11 18:42:56 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_bonus(char **tokens, char *figure)
 			pattern |= 1 << 1;
 		else if (ft_strcmp(tokens[i], NOISE_P) == 0)
 			pattern |= 1 << 2;
-		else
+		else if (tokens[i][0] != ' ' && tokens[i][0] != '\t')
 			return (printf("Warning: Unknown pattern '%s'\n", tokens[i]), -1);
 		if (i == max)
 			return (printf("Warning: More than three patterns\n"), -1);
