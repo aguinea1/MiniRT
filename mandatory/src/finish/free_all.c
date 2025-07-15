@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:53:31 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/13 12:47:00 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 12:07:37 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static void	my_clear(t_list **lst, void (*del)(void *))
 	*lst = NULL;
 }
 
-void	free_all(t_list **cyl, t_list **plane, t_list **sphere)
+void	free_all(t_list **cyl, t_list **plane, t_list **sphere, t_list **light)
 {
 	my_clear(sphere, delete);
 	my_clear(plane, delete);
 	my_clear(cyl, delete);
+	my_clear(light, delete);
 }

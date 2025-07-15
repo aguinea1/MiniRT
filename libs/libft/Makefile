@@ -6,14 +6,14 @@
 #    By: aguinea <aguinea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 17:09:23 by aguinea           #+#    #+#              #
-#    Updated: 2025/06/12 02:58:27 by aguinea          ###   ########.fr        #
+#    Updated: 2025/07/15 12:25:23 by aguinea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libft.a
 CC  = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 HBONUS = .bonus
 
 SRCS =  ft_isascii.c \

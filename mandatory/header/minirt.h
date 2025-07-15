@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/12 19:38:41 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:19:21 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_scene
 {
 	t_ambient	ambient;
 	t_camera	camera;
-	t_light		light;
+	t_list		*light;
 	t_list		*spheres;
 	t_list		*planes;
 	t_list		*cylinders;
@@ -208,7 +208,11 @@ t_hit	find_closest_sphere(t_ray ray, t_list *spheres);
 t_hit	hit_sphere(t_ray ray, t_sphere *sphere);
 t_hit	hit_cylinder(t_ray ray, t_cylinder *cy);
 t_hit	find_closest_cylinder(t_ray ray, t_list *cyls);
-int setup_scene(t_scene *scene);
+int		setup_scene(t_scene *scene);
+t_vec	ray_back(t_ray ray);
+t_vec	light_loop(t_scene *scene, t_hit hit, t_vec color);
+t_vec	calculate_light(t_hit hit, t_light *light, t_scene *scene);
+double	calculate_lightdir(t_hit hit, t_ray *shadow_ray, t_light *light);
 
 //THREADS
 void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);
@@ -232,5 +236,5 @@ void	close_window(t_mlx *mlx);
 void	key_call(mlx_key_data_t keydata, void *param);
 
 //FINISH
-void	free_all(t_list **cyl, t_list **plane, t_list **sphere);
+void	free_all(t_list **cyl, t_list **plane, t_list **sphere, t_list **light);
 #endif

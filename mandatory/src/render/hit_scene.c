@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:37:13 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/12 19:56:26 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:41:05 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,72 +16,59 @@ static t_hit	find_closest_hit(t_ray ray, t_scene *scene)
 {
 	t_hit	sphere;
 	t_hit	cyl;
+	t_hit	nothing;
 
 	sphere = find_closest_sphere(ray, scene->spheres);
 	cyl = find_closest_cylinder(ray, scene->cylinders);
-	if (!sphere.hit && cyl.hit)
-		return (cyl);
 	if (sphere.hit && (!cyl.hit || sphere.t < cyl.t))
+	{
+		sphere.normal = vec_normalize(sphere.normal);
 		return (sphere);
-	return (cyl);
+	}
+	if (cyl.hit)
+	{
+		cyl.normal = vec_normalize(cyl.normal);
+		return (cyl);
+	}
+	nothing.hit = 0;
+	return (nothing);
 }
-static t_vec	calculate_light(t_hit hit, t_light *light, t_scene *scene)
+
+t_vec	calculate_light(t_hit hit, t_light *light, t_scene *scene)
 {
-	t_vec	light_dir;
 	t_vec	diffuse;
 	t_vec	light_color;
 	t_ray	shadow_ray;
 	t_hit	shadow_hit;
-	float	diff_intensity;
-	float	light_distance;
+	double	intensity_dist[2];
 
-	light_dir = vec_sub(light->position, hit.point);
-	light_distance = vec_length(light_dir);
-	light_dir = vec_normalize(light_dir);
-
+	intensity_dist[1] = calculate_lightdir(hit, &shadow_ray, light);
 	shadow_ray.origin = vec_add(hit.point, vec_scale(hit.normal, 0.001));
-	shadow_ray.direction = light_dir;
 	shadow_hit = find_closest_hit(shadow_ray, scene);
-
-	if (shadow_hit.hit && shadow_hit.t < light_distance)
-		return ((t_vec){0, 0, 0});
-
-	diff_intensity = fmax(vec_dot(hit.normal, light_dir), 0.0);
+	if (shadow_hit.hit && shadow_hit.t < intensity_dist[1])
+		return (vec(0, 0, 0));
+	intensity_dist[0] = fmax(0.0, vec_dot(hit.normal, shadow_ray.direction));
 	light_color = vec_scale(light->color, light->brightness);
-	diffuse = vec_mul(vec_scale(hit.color, diff_intensity), light_color);
-
+	diffuse = vec_scale(vec_mul(vec_scale(hit.color, 1.0 / 255.0), light_color),
+			intensity_dist[0]);
 	return (diffuse);
 }
 
-t_vec ray_color(t_vec dir, t_scene *scene)
+t_vec	ray_color(t_vec dir, t_scene *scene)
 {
-    t_ray ray;
-    t_hit hit;
-    t_vec color = vec(0,0,0);
-    t_vec ambient;
-    //int i;
+	t_ray	ray;
+	t_hi	hit;
+	t_vec	ambient;
+	t_vec	color;
 
-    ray.origin = scene->camera.position;
-    ray.direction = vec_normalize(dir);
-
-    hit = find_closest_hit(ray, scene);
-    if (!hit.hit)
-    {
-        double t = 0.5 * (ray.direction.y + 1.0);
-        t_vec background[2] = {(t_vec){1.0,1.0,1.0}, (t_vec){0.5,0.7,1.0}};
-        return vec_add(vec_scale(background[0], 1.0 - t), vec_scale(background[1], t));
-    }
-    ambient = vec_scale(scene->ambient.color, scene->ambient.ratio);
-    color = vec_mul(hit.color, ambient);
-    //t_light *curr_light = &scene->light;
-   // while (curr_light)
-   // {
-	//	t_light *light = curr_light;
-		t_vec light_contrib = calculate_light(hit, &scene->light, scene);
-		color = vec_add(color, light_contrib);
-	//	curr_light = curr_light->next;
-//    }
-    return (color);
+	ray.origin = scene->camera.position;
+	ray.direction = vec_normalize(dir);
+	hit = find_closest_hit(ray, scene);
+	if (!hit.hit)
+		return (ray_back(ray));
+	ambient = vec_scale(scene->ambient.color, scene->ambient.ratio);
+	color = vec_mul(hit.color, ambient);
+	return (light_loop(scene, hit, color));
 }
 
 void	put_pixel(t_mlx *mlx, int x, int y, int *rgb)
