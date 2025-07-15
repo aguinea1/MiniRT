@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:17:05 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 16:45:33 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:48:54 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vec	light_loop(t_scene *scene, t_hit hit, t_vec color)
 	t_vec	light_contrib;
 
 	total_light = vec(0, 0, 0);
-	*curr = scene->light;
+	curr = scene->light;
 	while (curr)
 	{
 		light = (t_light *)curr->content;

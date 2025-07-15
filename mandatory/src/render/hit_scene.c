@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:37:13 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 16:41:05 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:48:36 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_vec	calculate_light(t_hit hit, t_light *light, t_scene *scene)
 t_vec	ray_color(t_vec dir, t_scene *scene)
 {
 	t_ray	ray;
-	t_hi	hit;
+	t_hit	hit;
 	t_vec	ambient;
 	t_vec	color;
 
