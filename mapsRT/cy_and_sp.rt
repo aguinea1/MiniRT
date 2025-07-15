@@ -1,0 +1,20 @@
+# Cámara (posición x,y,z | orientación x,y,z | FOV)
+C 0,0,-20 0,0,1 70  # Cámara centrada, viendo hacia el eje Z positivo
+
+# Luz ambiental (ratio [0..1] | color R,G,B)
+# A 0.1 255,255,255  # Luz ambiental tenue blanca
+
+# Luz puntual (posición x,y,z | brillo [0..1] | color R,G,B)
+L 10,10,-10 0.9 255,255,255  # Luz blanca intensa desde arriba a la derecha
+
+# Esferas (posición x,y,z | diámetro | color R,G,B)
+sp -6,0,10 3 255,0,0     # Esfera roja a la izquierda
+sp 0,0,12 3 0,255,0      # Esfera verde en el centro
+sp 6,0,14 3 0,0,255      # Esfera azul a la derecha
+sp -3,-3,18 2 255,255,0  # Esfera amarilla más al fondo
+
+# Cilindros (posición base x,y,z | orientación normalizada x,y,z | diámetro | altura | color R,G,B)
+cy -8,-2,16 0,1,0 1 6 200,0,200   # Cilindro violeta vertical a la izquierda
+cy 8,-2,18 0,1,0 1.5 8 0,255,255  # Cilindro cian a la derecha
+cy 0,-2,20 1,0,0 1 5 255,100,0    # Cilindro naranja horizontal más lejos
+

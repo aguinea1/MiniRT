@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:37:13 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 16:48:36 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 18:43:01 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ t_vec	calculate_light(t_hit hit, t_light *light, t_scene *scene)
 		return (vec(0, 0, 0));
 	intensity_dist[0] = fmax(0.0, vec_dot(hit.normal, shadow_ray.direction));
 	light_color = vec_scale(light->color, light->brightness);
-	diffuse = vec_scale(vec_mul(vec_scale(hit.color, 1.0 / 255.0), light_color),
-			intensity_dist[0]);
+	diffuse = vec_scale(vec_mul(hit.color, light_color), intensity_dist[0]);
 	return (diffuse);
 }
 

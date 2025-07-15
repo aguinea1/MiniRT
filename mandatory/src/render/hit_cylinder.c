@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:56:00 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 16:44:06 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/15 18:27:33 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	intersect_cylinder_body(t_ray ray,
 	double	h;
 	t_vec	pv[2];
 	t_vec	n;
-
+	
 	i = 0;
 	while (i++ < 2)
 	{
@@ -80,6 +80,8 @@ static void	intersect_cylinder_body(t_ray ray,
 		hit->point = pv[0];
 		n = vec_sub(pv[1], vec_scale(d->axis, h));
 		hit->normal = vec_normalize(n);
+		if (vec_dot(ray.direction, hit->normal) > 0)
+			hit->normal = vec_scale(hit->normal, -1);
 		hit->color = cy->color;
 	}
 }
