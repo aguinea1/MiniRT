@@ -2,7 +2,7 @@
 C 0,0,-20 0,0,1 70  # Cámara mirando hacia el eje Z+
 
 # Luz ambiental (ratio [0..1] | color R,G,B)
-#A 0.1 255,255,255  # Luz ambiental blanca suave
+A 0.1 255,255,255  # Luz ambiental blanca suave
 
 # Luz puntual (posición x,y,z | brillo [0..1] | color R,G,B)
 L 0,15,-10 0.9 255,255,255  # Luz blanca desde arriba y detrás de la cámara, ilumina todo el frontal

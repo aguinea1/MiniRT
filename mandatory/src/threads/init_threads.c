@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:51:46 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/10 17:50:38 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:17:29 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
+//esto es el tema de los hilos q te explique
 static void	init_th_struct(t_scene *scene, t_vec *views, t_mlx *mlx,
 		t_thread_data *th)
 {

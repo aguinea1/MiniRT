@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:57:30 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/11 18:59:13 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:24:05 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
+//utils full desordenados mete las cosas dnd te de a gana vaya
 void	free_array(char **array)
 {
 	int	i;

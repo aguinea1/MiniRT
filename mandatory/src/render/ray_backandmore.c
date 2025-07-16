@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:17:05 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 16:48:54 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:16:19 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
+// la variable background tiene dos[2], cada una pa un color pq le he metido difuminacion pero vaya pon el q te salga de los huevos
 t_vec	ray_back(t_ray ray)
 {
 	t_vec	background[2];
@@ -23,7 +23,7 @@ t_vec	ray_back(t_ray ray)
 	return (vec_add(vec_scale(background[0], 1.0 - t),
 			vec_scale(background[1], t)));
 }
-
+// el loop de la luz por si ves algo q mejorar(por cierto la luz, y las figuras son(una estructura con t_list(por ejemplo: la esfera es una t_list de t_spheres), por eso itero asi la luz, por si hay varias, por cierto eso no esta muy probado, te lo dejo a ti
 t_vec	light_loop(t_scene *scene, t_hit hit, t_vec color)
 {
 	t_vec	total_light;

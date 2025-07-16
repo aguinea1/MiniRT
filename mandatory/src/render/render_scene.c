@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:00:22 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/10 17:50:11 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:12:19 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
+//esto es el loop principal
 static void	rgb_to_putpixel(t_thread_data *th, double *st, int	*rgb)
 {
 	t_vec	dir;

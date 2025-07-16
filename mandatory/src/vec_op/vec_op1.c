@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:47:57 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/09 15:26:56 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:18:13 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
+//esto son todas las operaciones que encontre con vectores, ns ni si las uso todas pero bueno aqui estan
 t_vec	vec_add(t_vec a, t_vec b)
 {
 	return (vec(a.x + b.x, a.y + b.y, a.z + b.z));

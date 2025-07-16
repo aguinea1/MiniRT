@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 03:01:55 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/12 18:51:26 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:17:05 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
+//aqui por si quieres meterle zoom o esas mierdas(creo q va por aqui)
 static void	clear_image_black(mlx_image_t *img, int width, int height)
 {
 	int	y;

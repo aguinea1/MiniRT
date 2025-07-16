@@ -1,0 +1,13 @@
+
+#tu anade conos y mierdas para probar pq no los tengo puestos en ninguna, el bonus iria asi: cy 0,6,20 0,10 3 10 255,255,0 checker stripes etc..., la cosa es que si tu pones cy -6,6,22 0,1,0 3 10 0,255,255 ( o cualquiero otro dato, ya se ambiente luz cono o lo q sea, tienes que poner un comentario al final como en estas) sino tira error( cy -6,6,22 0,1,0 3 10 0,255,255 # Cilindro cian) asi pa q me entiendas, best parseo oat si me preguntas. ns si se entiende algo pero vaya que pongas al final #vwefhcbweuihv
+A 0.05 255,255,255              # Luz ambiental baja para sombras oscuras
+C 0,0,0 0,0,1 60                # Cámara igual
+L 10,10,0 1.0 255,255,255       # Luz intensa para iluminar más fuerte
+
+sp 0,0,20 4 255,0,0             # Esfera roja
+sp 6,0,22 4 0,255,0             # Esfera verde
+sp -6,0,22 4 0,0,255            # Esfera azul
+
+cy 0,6,20 0,1,0 3 10 255,255,0  # Cilindro amarillo
+cy 6,6,22 0,1,0 3 10 255,0,255  # Cilindro magenta
+cy -6,6,22 0,1,0 3 10 0,255,255 # Cilindro cian

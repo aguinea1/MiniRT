@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 16:19:21 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:27:47 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define THREADS 12
 
 //STRUCTS
-
+//si necesitas saber que es cada cosa, te vas a joder pq ni yo me acuerdo pero bueno se intuye mas o menos creo(sino pregunta, por cierto los datos se los meto en el parseo asi q deberias recibirlo todo bien creo), es lo unico q hace bien el parseo, y bueno intentare dejar la normi pasada de lo mio
 typedef enum e_pattern
 {
 	NONE,

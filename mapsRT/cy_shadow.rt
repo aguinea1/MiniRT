@@ -1,0 +1,6 @@
+A 0.2 255,255,255              # Luz ambiental baja
+C 0,0,0 0,0,1 60                # Cámara en origen, mirando hacia Z+
+L 10,10,10 0.8 255,255,255      # Luz puntual brillante
+
+cy 0,0,20 0,1,0 2 8 255,0,0     # Cilindro vertical rojo (centro en z=20)
+
