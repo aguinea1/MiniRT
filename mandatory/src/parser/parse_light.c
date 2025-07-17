@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:33:03 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/15 12:42:31 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/17 12:50:41 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	parse_light(char **tokens, t_scene *scene)
 	t_vec	pos;
 	char	**rgb;
 
-	scene->light = NULL;
+//	scene->light = NULL;
 	if (num_args(tokens) != 4)
 		return (printf("Error\nInvalid number of Light arguments\n"), 0);
 	if (!parse_vec(tokens[1], &pos))

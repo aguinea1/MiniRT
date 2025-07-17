@@ -1,0 +1,14 @@
+A 0.01 255,255,255               # Luz ambiental muy baja, para que las luces principales dominen
+C 0,0,0 0,0,1 60                 # Cámara: en el origen, mirando al eje Z+
+
+# Luz derecha (x positiva), enfocando hacia las esferas
+L 15,0,10 0.6 255,255,255        # Luz desde la derecha, ligeramente elevada
+
+# Luz izquierda (x negativa), enfocando hacia las esferas
+L -15,0,10 0.6 255,255,255       # Luz desde la izquierda, también elevada
+
+# Esferas al frente
+sp 0,0,20 4 255,0,0              # Roja al centro
+#sp 6,0,22 4 0,255,0              # Verde a la derecha
+#sp -6,0,22 4 0,0,255             # Azul a la izquierda
+

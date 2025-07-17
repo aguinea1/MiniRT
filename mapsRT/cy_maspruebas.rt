@@ -1,5 +1,5 @@
 #A 0.2 255,255,255           # Ambient light: 20% white
-C 0,0,0 0,0,-1 70          # Camera: position (0,0,10), looking toward -Z
+C 0,0,0 0,0,1 70          # Camera: position (0,0,10), looking toward -Z
 L 0,0,0 1.0 255,255,255     # Point light: strong white light
 
 

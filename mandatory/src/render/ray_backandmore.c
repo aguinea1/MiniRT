@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:17:05 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/16 13:16:19 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:05:32 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,33 @@ t_vec	ray_back(t_ray ray)
 	return (vec_add(vec_scale(background[0], 1.0 - t),
 			vec_scale(background[1], t)));
 }
-// el loop de la luz por si ves algo q mejorar(por cierto la luz, y las figuras son(una estructura con t_list(por ejemplo: la esfera es una t_list de t_spheres), por eso itero asi la luz, por si hay varias, por cierto eso no esta muy probado, te lo dejo a ti
-t_vec	light_loop(t_scene *scene, t_hit hit, t_vec color)
-{
-	t_vec	total_light;
-	t_list	*curr;
-	t_light	*light;
-	t_vec	light_contrib;
 
-	total_light = vec(0, 0, 0);
-	curr = scene->light;
-	while (curr)
-	{
-		light = (t_light *)curr->content;
-		light_contrib = calculate_light(hit, light, scene);
-		total_light = vec_add(total_light, light_contrib);
-		curr = curr->next;
-	}
-	return (vec_add(color, total_light));
+t_vec light_loop(t_scene *scene, t_hit hit, t_vec color)
+{
+    t_vec total_light;
+    t_list *curr;
+    t_light *light;
+    t_vec light_contrib;
+    t_vec ambient_plus_current;
+
+    total_light = vec(0, 0, 0);
+    curr = scene->light;
+    while (curr)
+    {
+        light = (t_light *)curr->content;
+        light_contrib = calculate_light(hit, light, scene);
+		ambient_plus_current = vec_add(color, total_light);
+        if (light_contrib.x > ambient_plus_current.x)
+            total_light.x += light_contrib.x - ambient_plus_current.x;
+        if (light_contrib.y > ambient_plus_current.y)
+            total_light.y += light_contrib.y - ambient_plus_current.y;
+        if (light_contrib.z > ambient_plus_current.z)
+            total_light.z += light_contrib.z - ambient_plus_current.z;
+        curr = curr->next;
+    }
+    return (vec_add(color, total_light));
 }
+
 
 double	calculate_lightdir(t_hit hit, t_ray *shadow_ray, t_light *light)
 {
