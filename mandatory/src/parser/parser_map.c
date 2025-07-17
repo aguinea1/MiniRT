@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:46:18 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/12 18:25:31 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:17:08 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,23 @@ static int	parse_line(char *line, t_scene *scene)
 	int		ret;
 
 	ret = -1;
-	remove_comment(line);
+
+	// primero convierte tab a espacio y corta comentario si hay
 	if (!tab_for_space(line))
 		return (1);
+
+	// si la línea queda vacía después, ignora
+	if (line[0] == '\0')
+		return (1);
+
+	// split por espacios
 	tokens = ft_split1(line, ' ');
-	if (!tokens)
-		return (printf("split failed\n"), 0);
+	if (!tokens || !tokens[0])  // no hay tokens => línea vacía o solo comentario
+	{
+		free_array(tokens);
+		return (1);
+	}
+
 	if (ft_strcmp(tokens[0], "A") == 0)
 		ret = parse_ambient(tokens, scene);
 	else if (ft_strcmp(tokens[0], "C") == 0)
@@ -68,8 +79,11 @@ static int	parse_line(char *line, t_scene *scene)
 		ret = parse_plane(tokens, scene);
 	else if (ft_strcmp(tokens[0], "cy") == 0)
 		ret = parse_cylinder(tokens, scene);
-	ret = parse_line_bonus(scene, ret, tokens);
-	return (free_array(tokens), ret);
+	else
+		ret = parse_line_bonus(scene, ret, tokens);
+
+	free_array(tokens);
+	return (ret);
 }
 
 static int	parse_get_line(int fd, t_scene *scene)

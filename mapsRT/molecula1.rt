@@ -1,0 +1,20 @@
+A 0.4 255,255,255                # Luz ambiental
+C 0,0,-20 0,0,1 60               # Cámara frontal
+L 10,10,-10 0.7 255,255,255      # Luz superior derecha
+L -10,10,-10 0.5 255,255,255     # Luz superior izquierda
+
+# Átomo central: Carbono (C)
+sp 0,0,0 2 50,50,50              # Carbono - esfera gris oscura (casi negra)
+
+# Átomos de Hidrógeno (H)
+sp 3,3,3 1 255,255,255           # Hidrógeno 1
+sp -3,3,3 1 255,255,255          # Hidrógeno 2
+sp 3,-3,3 1 255,255,255          # Hidrógeno 3
+sp -3,-3,3 1 255,255,255         # Hidrógeno 4
+
+# Enlaces (cilindros) entre Carbono y cada Hidrógeno
+cy 0,0,0 0.6,0.6,0.6 0.3 5 150,150,150   # Enlace 1
+cy 0,0,0 -0.6,0.6,0.6 0.3 5 150,150,150  # Enlace 2
+cy 0,0,0 0.6,-0.6,0.6 0.3 5 150,150,150  # Enlace 3
+cy 0,0,0 -0.6,-0.6,0.6 0.3 5 150,150,150 # Enlace 4
+

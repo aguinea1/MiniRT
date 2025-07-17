@@ -1,0 +1,15 @@
+A 0.4 255,255,255                # Luz ambiental suave
+C 0,0,-20 0,0,1 60              # Cámara frontal
+L 10,10,-10 0.7 255,255,255     # Luz principal
+
+# Átomo central (Oxígeno)
+sp 0,0,0 2 255,0,0              # Esfera roja grande (O)
+
+# Átomos de Hidrógeno
+sp 3,2,0 1 255,255,255          # Hidrógeno 1 - blanco
+sp -3,2,0 1 255,255,255         # Hidrógeno 2 - blanco
+
+# Enlaces (cilindros) entre O y H
+cy 0,0,0 0.6,0.4,0 0.3 4 100,100,100  # Enlace a H1 (gris)
+cy 0,0,0 -0.6,0.4,0 0.3 4 100,100,100 # Enlace a H2 (gris)
+

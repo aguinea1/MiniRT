@@ -8,7 +8,7 @@ L 0,5,-10 1.0 255,255,255  # Luz encima y delante de la cámara, apuntando al ci
 #A 0.1 255,255,255  # Un poco de luz ambiental
 
 # Cilindro: posición base, orientación, diámetro, altura, color RGB
-cy 0,-2,5 0,1,0 2 6 255,0,0  # Cilindro rojo vertical en el centro de la escena
+cy 0,-2,5 0,1,0 2 6 255,0,0
 
 # Plano de fondo para ver contraste
 pl 0,-5,0 0,1,0 150,150,150  # Suelo gris claro

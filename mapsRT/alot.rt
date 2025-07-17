@@ -1,0 +1,30 @@
+A 0.2 255,255,255                # Luz ambiental: intensidad 0.2, color blanco
+C 0,0,0 0,0,1 60                # Cámara: posición (0,0,0), mirando hacia Z+, FOV 60°
+
+#L -10,10,0 0.7 255,255,255      # Luz izquierda: posición (-10,10,0), intensidad 0.7, blanca
+L 10,10,0 0.7 255,255,255       # Luz derecha: posición (10,10,0), intensidad 0.7, blanca
+#L 0,-10,20 0.5 200,200,255       # Luz inferior: posición (0,-10,20), intensidad 0.5, azul claro
+
+
+# 10 esferas
+sp 0,0,20 4 255,0,0             # Roja
+sp 6,0,22 4 0,255,0             # Verde
+sp -6,0,22 4 0,0,255            # Azul
+sp 3,2,25 3 255,255,0           # Amarilla
+sp -3,2,25 3 0,255,255          # Cian
+sp 8,-1,23 3 255,0,255          # Magenta
+sp -8,-1,23 3 128,128,128       # Gris
+sp 0,-3,24 2 255,165,0          # Naranja
+sp 4,-2,21 2 0,128,0            # Verde oscuro
+sp -4,-2,21 2 0,0,128           # Azul oscuro
+
+# 8 cilindros
+cy 0,6,20 0,1,0 3 10 255,255,0   # Amarillo
+cy 6,6,22 0,1,0 3 10 255,0,255   # Magenta
+cy -6,6,22 0,1,0 3 10 0,255,255  # Cian
+cy 3,7,24 0,1,0 2 8 128,0,0      # Rojo oscuro
+cy -3,7,24 0,1,0 2 8 0,128,128   # Azul verdoso
+cy 8,7,23 0,1,0 3 10 255,140,0   # Naranja
+cy -8,7,23 0,1,0 3 10 75,0,130   # Índigo
+cy 0,7,26 0,1,0 2 6 128,128,0    # Oliva
+
