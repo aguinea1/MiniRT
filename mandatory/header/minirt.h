@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/16 13:27:47 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 20:45:15 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 # define STRIPE_P "stripe"
 # define NOISE_P "noise"
 # define THREADS 12
+# define RGB_LIGHT "Error\nRGB values must be 0–255\n"
 
 //STRUCTS
-//si necesitas saber que es cada cosa, te vas a joder pq ni yo me acuerdo pero bueno se intuye mas o menos creo(sino pregunta, por cierto los datos se los meto en el parseo asi q deberias recibirlo todo bien creo), es lo unico q hace bien el parseo, y bueno intentare dejar la normi pasada de lo mio
+//lo q hay q hacer esta en el main
 typedef enum e_pattern
 {
 	NONE,
@@ -87,18 +88,18 @@ typedef struct s_plane
 	t_pattern	pattern;
 }	t_plane;
 
-typedef struct s_cyl_data 
+typedef struct s_cyl_data
 {
-	t_vec axis;
-	t_vec oc;
-	t_vec d_proj;
-	t_vec oc_proj;
-	double a;
-	double b;
-	double c;
-	double disc;
-	double sqrt_disc;
-} t_cyl_data;
+	t_vec	axis;
+	t_vec	oc;
+	t_vec	d_proj;
+	t_vec	oc_proj;
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+	double	sqrt_disc;
+}	t_cyl_data;
 
 typedef struct s_cylinder
 {
@@ -164,6 +165,7 @@ typedef struct s_hit
 	t_vec	normal;
 	t_vec	color;
 	int		hit;
+	int		i;
 }	t_hit;
 
 //PARSER
@@ -189,7 +191,11 @@ int		is_valid_rgb_value(char *str);
 int		num_args(char **arr);
 char	**ft_split1(char const *s, char c);
 void	evaluate_token(char **tokens);
-void remove_comment(char *line);
+void	remove_comment(char *line);
+int		tab_for_space(char *line);
+void	hit_cylinder_cap(t_vec p, t_hit *hit, double t, t_vec axis);
+void	center_cyl(int i, t_cylinder *cy, t_vec	axis, t_vec *center);
+void	whats_t(double *t, t_cyl_data *d, int i);
 
 //RENDER
 t_vec	vec_scale(t_vec v, double scalar);

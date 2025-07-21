@@ -1,0 +1,39 @@
+A 0.3 255,255,255                # Luz ambiental suave
+C 0,0,-30 0,0,1 45              # Cámara principal
+L 15,15,-10 0.8 255,255,255     # Luz principal
+
+# Átomo central (Carbono - C)
+sp 0,0,0 2 0,0,255              # Esfera azul grande (C)
+
+# Átomos alrededor del Carbono
+sp 4,0,0 1 0,255,0              # Oxígeno (O) - verde
+sp -4,0,0 1 255,0,0             # Nitrógeno (N) - rojo
+sp 0,4,0 1 255,255,0            # Azufre (S) - amarillo
+sp 0,-4,0 1 255,0,255           # Fósforo (P) - magenta
+sp 0,0,4 1 0,255,255            # Flúor (F) - cyan
+sp 0,0,-4 1 255,165,0           # Cloro (Cl) - naranja
+
+# Enlaces (Cilindros desde el Carbono central a cada átomo)
+cy 0,0,0 1.6,0,0 0.3 4 150,150,150     # Enlace a Oxígeno
+cy 0,0,0 -1.6,0,0 0.3 4 150,150,150    # Enlace a Nitrógeno
+cy 0,0,0 0,1.6,0 0.3 4 150,150,150     # Enlace a Azufre
+cy 0,0,0 0,-1.6,0 0.3 4 150,150,150    # Enlace a Fósforo
+cy 0,0,0 0,0,1.6 0.3 4 150,150,150     # Enlace a Flúor
+cy 0,0,0 0,0,-1.6 0.3 4 150,150,150    # Enlace a Cloro
+
+# Átomos adicionales para complejidad y cantidad
+sp 6,2,2 0.8 100,0,200          # Átomo exótico 1
+sp -6,-2,-2 0.8 50,150,255      # Átomo exótico 2
+sp 3,-5,1 0.8 200,200,50        # Átomo exótico 3
+sp -3,5,-1 0.8 0,200,100        # Átomo exótico 4
+sp 5,5,5 0.8 255,100,100        # Átomo exótico 5
+sp -5,-5,-5 0.8 100,255,100     # Átomo exótico 6
+
+# Enlaces adicionales entre los exóticos
+cy 6,2,2 -1,-1,-1 0.2 4 80,80,80	#vfed
+cy -6,-2,-2 1,1,1 0.2 4 80,80,80	#fghj
+cy 3,-5,1 0,3,1 0.2 4 80,80,80		#fghjk
+cy -3,5,-1 0,-3,-1 0.2 4 80,80,80	#SDFGHJ
+cy 5,5,5 -1,-1,-2 0.2 4 80,80,80	#dfghjk
+cy -5,-5,-5 1,1,2 0.2 4 80,80,80	#DFGHJ
+

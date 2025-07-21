@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:56 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/10 17:49:39 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 20:39:53 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	space_viewport(t_scene *scene, double *viewport, t_vec	*ref, t_vec *v)
 {
-	v[0] = vec_scale(ref[1], 2 * viewport[1]);
-	v[1] = vec_scale(ref[2], 2 * viewport[0]);
+	v[0] = vec_scale(ref[1], 2 * viewport[0]);
+	v[1] = vec_scale(ref[2], 2 * viewport[1]);
 	v[2] = vec_sub(vec_sub(vec_sub(scene->camera.position, vec_scale
 					(v[0], 0.5)), vec_scale(v[1], 0.5)), ref[0]);
 }
@@ -31,8 +31,8 @@ void	viewport_calc(t_scene *scene, double *viewport)
 	theta = scene->camera.fov * M_PI / 180.0;
 	half_height = tan(theta / 2);
 	half_width = aspect_ratio * half_height;
-	viewport[0] = half_height;
-	viewport[1] = half_width;
+	viewport[1] = half_height;
+	viewport[0] = half_width;
 }
 
 void	camera_ref(t_scene	*scene, t_vec *ref)

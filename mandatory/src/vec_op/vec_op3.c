@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 19:37:07 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/12 19:37:27 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 20:42:46 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec	vec_mul(t_vec a, t_vec b)
 {
-	t_vec result;
+	t_vec	result;
 
 	result.x = a.x * b.x;
 	result.y = a.y * b.y;

@@ -1,5 +1,5 @@
 # Cámara: posición (x,y,z), dirección (x,y,z), FOV
-C 0,0,-20 0,0,1 70  # Cámara centrada mirando al eje Z+
+C 0,0,-20 0,0,1 70
 
 # Luz: posición (x,y,z), brillo (0-1), color RGB
 L 0,5,-10 1.0 255,255,255  # Luz encima y delante de la cámara, apuntando al cilindro
@@ -11,5 +11,5 @@ L 0,5,-10 1.0 255,255,255  # Luz encima y delante de la cámara, apuntando al ci
 cy 0,-2,5 0,1,0 2 6 255,0,0
 
 # Plano de fondo para ver contraste
-pl 0,-5,0 0,1,0 150,150,150  # Suelo gris claro
+pl 0,-5,0 0,1,0 150,150,150
 

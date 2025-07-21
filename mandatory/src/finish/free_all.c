@@ -6,12 +6,12 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:53:31 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/16 15:21:50 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 20:40:18 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-//anade las etructuras que quieras para hacerles free y ya, en teoria deberia funcionar
+
 static void	delete(void *content)
 {
 	free(content);

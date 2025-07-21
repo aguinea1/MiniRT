@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:58:27 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/11 19:19:00 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 20:41:22 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ static size_t	count_tokens(char const *s, char delimiter)
 static int	fill(char **token_v, char const *s, char delimiter)
 {
 	size_t	len;
-	int		position = 0;
+	int		position;
 
+	position = 0;
 	while (*s && *s != '#')
 	{
 		while (*s == delimiter && *s && *s != '#')
 			s++;
 		if (*s == '\0' || *s == '#')
-			break;
+			break ;
 		len = 0;
 		while (s[len] != delimiter && s[len] && s[len] != '#')
 			len++;
@@ -106,4 +107,3 @@ void	evaluate_token(char **tokens)
 		tokens[i - 1] = NULL;
 	}
 }
-

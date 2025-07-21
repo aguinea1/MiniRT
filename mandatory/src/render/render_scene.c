@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:00:22 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/16 13:12:19 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 20:12:31 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ void	*render_loop(void *data)
 
 	th = (t_thread_data *)data;
 	j = th->y_start;
-	while (j++ < th->y_end)
+	while (j < th->y_end)
 	{
 		i = 0;
-		while (i++ < WIDTH)
+		while (i < WIDTH)
 		{
-			st[0] = (double)i / (WIDTH - 1);
-			st[1] = (double)(HEIGHT - j - 1) / (HEIGHT - 1);
+			st[0] = (double)i / (WIDTH - 1) + 0.072;
+			st[1] = (double)(HEIGHT - 1 - j) / (HEIGHT - 1) - 0.02;
 			rgb_to_putpixel(th, st, rgb);
 			put_pixel(th->mlx, i, j, rgb);
+			i++;
 		}
+		j++;
 	}
 	return (NULL);
 }

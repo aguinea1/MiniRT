@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 01:46:17 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/12 19:02:33 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 16:12:38 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	check_args_pos_or(char **tokens, t_vec *pos, t_vec *or)
 	if (!parse_vec(tokens[2], or))
 		return (printf("Error\nInvalid cylinder orientation vector\n"), 0);
 	if (vec_length(*or) < 1e-6)
-		return (printf("Error\nCylinder orientation vector cannot be zero\n"), 0);
+		return (printf("Error\nCylinder orientation vector cannot be zero\n"),
+			0);
 	*or = vec_normalize(*or);
 	if (!is_valid_float(tokens[3]) || !is_valid_float(tokens[4]))
 		return (printf("Error\nInvalid cylinder diameter or height\n"), 0);

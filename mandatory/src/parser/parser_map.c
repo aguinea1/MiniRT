@@ -6,32 +6,11 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:46:18 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/17 16:17:08 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 16:06:22 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
-int	tab_for_space(char *line)
-{
-	int	i;
-
-	if (!line || line[0] == '#' || line[0] == '\0')
-		return (0);
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\t')
-			line[i] = ' ';
-		else if (line[i] == '#')
-		{
-			line[i] = '\0'; // corta la línea en el comentario
-			break;
-		}
-		i++;
-	}
-	return (1);
-}
 
 static int	parse_line_bonus(t_scene *scene, int ret, char **tokens)
 {
@@ -50,23 +29,11 @@ static int	parse_line(char *line, t_scene *scene)
 	int		ret;
 
 	ret = -1;
-
-	// primero convierte tab a espacio y corta comentario si hay
-	if (!tab_for_space(line))
+	if (!tab_for_space(line) || line[0] == '\0')
 		return (1);
-
-	// si la línea queda vacía después, ignora
-	if (line[0] == '\0')
-		return (1);
-
-	// split por espacios
 	tokens = ft_split1(line, ' ');
-	if (!tokens || !tokens[0])  // no hay tokens => línea vacía o solo comentario
-	{
-		free_array(tokens);
-		return (1);
-	}
-
+	if (!tokens || !tokens[0])
+		return (free_array(tokens), 1);
 	if (ft_strcmp(tokens[0], "A") == 0)
 		ret = parse_ambient(tokens, scene);
 	else if (ft_strcmp(tokens[0], "C") == 0)
@@ -81,9 +48,7 @@ static int	parse_line(char *line, t_scene *scene)
 		ret = parse_cylinder(tokens, scene);
 	else
 		ret = parse_line_bonus(scene, ret, tokens);
-
-	free_array(tokens);
-	return (ret);
+	return (free_array(tokens), ret);
 }
 
 static int	parse_get_line(int fd, t_scene *scene)

@@ -2,7 +2,7 @@
 #                              CONFIGURATION                                   #
 ################################################################################
 
-NAME			= MiniRT
+NAME			= MINI.RT
 #NAME_BONUS		= BonusRT
 
 CC				= cc
@@ -53,7 +53,9 @@ SRCS = $(SRCDIR)/main/main.c 					\
 	   $(SRCDIR)/utils/utils4.c					\
 	   $(SRCDIR)/render/setup_scene.c			\
 	   $(SRCDIR)/vec_op/vec_op3.c				\
-	   $(SRCDIR)/render/ray_backandmore.c			
+	   $(SRCDIR)/render/ray_backandmore.c		\
+	   $(SRCDIR)/utils/utils_parser.c			\
+	   $(SRCDIR)/utils/utils_cylinder.c
 
 
 LIBFT_SRCS = \
