@@ -6,20 +6,20 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:21:23 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/21 16:09:17 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/07/21 22:01:54 by aguinea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
 
 //pa q sepas lo q falta mas o menos
-//2.cono
-//3.plano
-//5. todo el bonus(tres texturas diferentes creo)
-//6. yo le meteria zoom
-//7. tambien le meteria q al apretar y arrastrar el raton
+//1.cono
+//2.plano
+//3. todo el bonus(tres texturas diferentes creo)
+//4. yo le meteria zoom
+//5. tambien le meteria q al apretar y arrastrar el raton
 //pudieramos mover el POV(pero bueno quiza es porro)
-//9. normi(probablemente tu parte q eres un puto terrorista)
+//6. normi(probablemente tu parte q eres un puto terrorista)
 
 static t_scene	scene_init(void)
 {
