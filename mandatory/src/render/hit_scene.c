@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:37:13 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/21 19:27:23 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/09/15 15:18:08 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ static t_hit	find_closest_hit(t_ray ray, t_scene *scene)
 	t_hit	sphere;
 	t_hit	cyl;
 	t_hit	nothing;
+	t_hit	plane;
+	t_hit	cone;
 
+	cone = find_closest_cone(ray, scene->cones);
+	plane = find_closest_plane(ray, scene->planes);
 	sphere = find_closest_sphere(ray, scene->spheres);
 	cyl = find_closest_cylinder(ray, scene->cylinders);
 	if (sphere.hit && (!cyl.hit || sphere.t < cyl.t))
@@ -37,6 +41,10 @@ static t_hit	find_closest_hit(t_ray ray, t_scene *scene)
 			cyl.normal = vec_scale(cyl.normal, -1);
 		return (cyl);
 	}
+	if (cone.hit)
+		return (cone);
+	if (plane.hit)
+		return (plane);
 	nothing.hit = 0;
 	return (nothing);
 }

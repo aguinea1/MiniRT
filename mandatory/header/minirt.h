@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/21 20:45:15 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/09/15 16:19:40 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,9 @@ t_vec	ray_back(t_ray ray);
 t_vec	light_loop(t_scene *scene, t_hit hit, t_vec color);
 t_vec	calculate_light(t_hit hit, t_light *light, t_scene *scene);
 double	calculate_lightdir(t_hit hit, t_ray *shadow_ray, t_light *light);
+t_hit	find_closest_plane(t_ray ray, t_list *list);
+t_hit	find_closest_cone(t_ray ray, t_list *list);
+t_hit	hit_plane(t_ray ray, t_plane *plane);
 
 //THREADS
 void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);

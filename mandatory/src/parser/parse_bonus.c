@@ -6,7 +6,7 @@
 /*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:59:45 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/11 18:42:56 by aguinea          ###   ########.fr       */
+/*   Updated: 2025/09/15 16:36:45 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	which_is(char *figure)
 		return (6);
 	else if (ft_strcmp(figure, "plane") == 0)
 		return (4);
-	else if (ft_strcmp(figure, "cone") == 0)
+	else if (ft_strcmp(figure, "cones") == 0)
 		return (6);
 	return (4);
 }

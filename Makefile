@@ -6,7 +6,7 @@ NAME			= MINI.RT
 #NAME_BONUS		= BonusRT
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -Ofast -g #-fsanitize=address
 THFLAGS			= -lpthread
 DEPFLAGS		= -MMD -MF $(DEPDIR)/$*.d
 LDFLAGS			= -lm
@@ -49,6 +49,8 @@ SRCS = $(SRCDIR)/main/main.c 					\
 	   $(SRCDIR)/threads/init_threads.c			\
 	   $(SRCDIR)/render/hit_scene.c				\
 	   $(SRCDIR)/render/hit_sphere.c			\
+	   $(SRCDIR)/render/hit_plane.c				\
+	   $(SRCDIR)/render/hit_cone.c				\
 	   $(SRCDIR)/render/hit_cylinder.c			\
 	   $(SRCDIR)/utils/utils4.c					\
 	   $(SRCDIR)/render/setup_scene.c			\
