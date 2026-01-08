@@ -7,7 +7,7 @@ L 10,10,0 0.7 255,255,255       # Luz derecha: posición (10,10,0), intensidad 0
 
 
 # 10 esferas
-sp 0,0,20 4 255,0,0             # Roja
+sp 0,0,20 4 255,0,0 bump             # Roja
 sp 6,0,22 4 0,255,0             # Verde
 sp -6,0,22 4 0,0,255            # Azul
 sp 3,2,25 3 255,255,0           # Amarilla
@@ -19,7 +19,7 @@ sp 4,-2,21 2 0,128,0 checker            # Verde oscuro
 sp -4,-2,21 2 0,0,128 checker           # Azul oscuro
 
 # 8 cilindros
-cy 0,6,20 0,1,0 3 10 255,255,0   # Amarillo
+cy 0,6,20 0,1,0 3 10 255,255,0 bump   # Amarillo
 cy 6,6,22 0,1,0 3 10 255,0,255   # Magenta
 cy -6,6,22 0,1,0 3 10 0,255,255  # Cian
 cy 3,7,24 0,1,0 2 8 128,0,0      # Rojo oscuro

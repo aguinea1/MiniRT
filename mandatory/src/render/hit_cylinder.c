@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:56:00 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 19:32:42 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 20:56:15 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	check_cylinder_cap(t_ray ray, t_cylinder *cy,
 				{
 					hit->i = i;
 					hit_cylinder_cap(c_p[1], hit, t_de[0], axis);
-					if (cy->pattern == NONE)
+					if (cy->pattern == NONE || cy->pattern == BUMP)
 						hit->color = cy->color;
 					else if (cy->pattern == CHECKER)
 						hit->color = ft_checkerboard(*hit);
@@ -93,8 +93,11 @@ static void	intersect_cylinder_body(t_ray ray, t_cylinder *cy,
 		hit->t = t;
 		hit->point = p[0];
 		n = vec_sub(p[1], vec_scale(d->axis, h));
-		hit->normal = vec_normalize(n);
-		if (cy->pattern == NONE)
+		if (cy->pattern == BUMP)
+			hit->normal = ft_bump_normal(*hit, 0.3);
+		else
+			hit->normal = vec_normalize(n);
+		if (cy->pattern == NONE || cy->pattern == BUMP)
 			hit->color = cy->color;
 		else if (cy->pattern == CHECKER)
 			hit->color = ft_checkerboard(*hit);

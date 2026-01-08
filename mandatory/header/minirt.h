@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 19:28:38 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 20:51:34 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define CHECKER_P "checker"
 # define STRIPE_P "stripe"
 # define NOISE_P "noise"
+# define BUMP_P "bump"
 # define THREADS 12
 # define RGB_LIGHT "Error\nRGB values must be 0–255\n"
 
@@ -36,7 +37,8 @@ typedef enum e_pattern
 	NONE,
 	CHECKER,
 	STRIPE,
-	NOISE
+	NOISE,
+	BUMP
 }	t_pattern;
 
 typedef struct s_vec
@@ -225,6 +227,7 @@ t_hit	find_closest_plane(t_ray ray, t_list *list);
 t_hit	find_closest_cone(t_ray ray, t_list *list);
 t_hit	hit_plane(t_ray ray, t_plane *plane);
 t_vec	ft_checkerboard(t_hit hit);
+t_vec	ft_bump_normal(t_hit hit, double strength);
 
 //THREADS
 void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);

@@ -6,11 +6,21 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:59:42 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 19:34:50 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 20:49:27 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
+
+t_vec	ft_bump_normal(t_hit hit, double strength)
+{
+	t_vec	n;
+	double	bump;
+
+	bump = sin(hit.point.x * 10) * sin(hit.point.y * 10);
+	n = vec_add(hit.normal, vec_scale(hit.normal, bump * strength));
+	return (vec_normalize(n));
+}
 
 static void	complete_abc(t_ray ray, t_sphere *sphere, double *abc, t_vec oc)
 {
@@ -24,7 +34,7 @@ t_vec	ft_checkerboard(t_hit hit)
 	int	check;
 	double	scale;
 
-	scale = 1.5; // tamaño de los cuadrados
+	scale = 1.0; // tamaño de los cuadrados
 	check = (int)(floor(hit.point.x * scale)
 			+ floor(hit.point.y * scale)
 			+ floor(hit.point.z * scale)) % 2;
@@ -57,8 +67,11 @@ t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
 	hit.hit = 1;
 	hit.t = t;
 	hit.point = vec_add(ray.origin, vec_scale(ray.direction, t));
-	hit.normal = vec_normalize(vec_sub(hit.point, sphere->center));
-	if (sphere->pattern == NONE)
+	if (sphere->pattern == BUMP)
+		hit.normal = ft_bump_normal(hit, 0.3);
+	else
+		hit.normal = vec_normalize(vec_sub(hit.point, sphere->center));
+	if (sphere->pattern == NONE || sphere->pattern == BUMP)
 		hit.color = sphere->color;
 	else if (sphere->pattern == CHECKER)
 		hit.color = ft_checkerboard(hit);

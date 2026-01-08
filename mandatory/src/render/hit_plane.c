@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:35:51 by lbellmas          #+#    #+#             */
-/*   Updated: 2026/01/08 19:29:44 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 20:52:02 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ t_hit	hit_plane(t_ray ray, t_plane *plane)
 	hit.hit = 1;
 	hit.t = t;
 	hit.point = vec_add(ray.origin, vec_scale(ray.direction, t));
-	hit.normal = plane->normal;
-	if (plane->pattern == NONE)
+	if (plane->pattern == BUMP)
+		hit.normal = ft_bump_normal(hit, 0.3);
+	else
+		hit.normal = plane->normal;
+	if (plane->pattern == NONE || plane->pattern == BUMP)
 		hit.color = plane->color;
 	else if (plane->pattern == CHECKER)
 		hit.color = ft_checkerboard(hit);
