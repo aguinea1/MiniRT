@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:59:42 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/10 17:44:52 by aguinea          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:34:50 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@ static void	complete_abc(t_ray ray, t_sphere *sphere, double *abc, t_vec oc)
 	abc[0] = vec_dot(ray.direction, ray.direction);
 	abc[1] = 2.0 * vec_dot(oc, ray.direction);
 	abc[2] = vec_dot(oc, oc) - powf(sphere->diameter / 2, 2);
+}
+
+t_vec	ft_checkerboard(t_hit hit)
+{
+	int	check;
+	double	scale;
+
+	scale = 1.5; // tamaño de los cuadrados
+	check = (int)(floor(hit.point.x * scale)
+			+ floor(hit.point.y * scale)
+			+ floor(hit.point.z * scale)) % 2;
+
+	if (check == 0)
+		return (vec(255, 255, 255));
+	else
+		return (vec(0, 0, 0));
 }
 
 t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
@@ -42,7 +58,10 @@ t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
 	hit.t = t;
 	hit.point = vec_add(ray.origin, vec_scale(ray.direction, t));
 	hit.normal = vec_normalize(vec_sub(hit.point, sphere->center));
-	hit.color = sphere->color;
+	if (sphere->pattern == NONE)
+		hit.color = sphere->color;
+	else if (sphere->pattern == CHECKER)
+		hit.color = ft_checkerboard(hit);
 	return (hit);
 }
 
@@ -66,5 +85,7 @@ t_hit	find_closest_sphere(t_ray ray, t_list *spheres)
 		}
 		spheres = spheres->next;
 	}
+	closest_hit.ks = 0.5;
+	closest_hit.shininess = 32;
 	return (closest_hit);
 }

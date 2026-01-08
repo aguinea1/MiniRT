@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:56:00 by aguinea           #+#    #+#             */
-/*   Updated: 2025/07/21 20:37:26 by aguinea          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:32:42 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_hit	find_closest_cylinder(t_ray ray, t_list *cyls)
 		}
 		cyls = cyls->next;
 	}
+	closest_hit.ks = 0.5;
+	closest_hit.shininess = 32;
 	return (closest_hit);
 }
 
@@ -57,7 +59,10 @@ static void	check_cylinder_cap(t_ray ray, t_cylinder *cy,
 				{
 					hit->i = i;
 					hit_cylinder_cap(c_p[1], hit, t_de[0], axis);
-					hit->color = cy->color;
+					if (cy->pattern == NONE)
+						hit->color = cy->color;
+					else if (cy->pattern == CHECKER)
+						hit->color = ft_checkerboard(*hit);
 				}
 			}
 		}
@@ -89,7 +94,10 @@ static void	intersect_cylinder_body(t_ray ray, t_cylinder *cy,
 		hit->point = p[0];
 		n = vec_sub(p[1], vec_scale(d->axis, h));
 		hit->normal = vec_normalize(n);
-		hit->color = cy->color;
+		if (cy->pattern == NONE)
+			hit->color = cy->color;
+		else if (cy->pattern == CHECKER)
+			hit->color = ft_checkerboard(*hit);
 	}
 }
 

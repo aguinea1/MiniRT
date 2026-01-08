@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cone.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:22:22 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/09/15 16:20:11 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:56:01 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ t_hit	find_closest_cone(t_ray ray, t_list *list)
 		}
 		list = list->next;
 	}
+	closest_hit.ks = 0.5;
+	closest_hit.shininess = 32;
 	return (closest_hit);
 }
 

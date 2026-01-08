@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:35:51 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/09/15 14:08:01 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:29:44 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_hit	hit_plane(t_ray ray, t_plane *plane)
 	hit.t = t;
 	hit.point = vec_add(ray.origin, vec_scale(ray.direction, t));
 	hit.normal = plane->normal;
-	hit.color = plane->color;
+	if (plane->pattern == NONE)
+		hit.color = plane->color;
+	else if (plane->pattern == CHECKER)
+		hit.color = ft_checkerboard(hit);
 	return (hit);
 }
 
@@ -62,5 +65,7 @@ t_hit	find_closest_plane(t_ray ray, t_list *list)
 		}
 		list = list->next;
 	}
+	closest_hit.ks = 0.5;
+	closest_hit.shininess = 32;
 	return (closest_hit);
 }

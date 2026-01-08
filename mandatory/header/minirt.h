@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2025/09/15 16:19:40 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:28:38 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ typedef struct s_hit
 	t_vec	color;
 	int		hit;
 	int		i;
+	double	ks;
+	double	shininess;
 }	t_hit;
 
 //PARSER
@@ -222,6 +224,7 @@ double	calculate_lightdir(t_hit hit, t_ray *shadow_ray, t_light *light);
 t_hit	find_closest_plane(t_ray ray, t_list *list);
 t_hit	find_closest_cone(t_ray ray, t_list *list);
 t_hit	hit_plane(t_ray ray, t_plane *plane);
+t_vec	ft_checkerboard(t_hit hit);
 
 //THREADS
 void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);

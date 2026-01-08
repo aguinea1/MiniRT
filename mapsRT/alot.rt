@@ -15,8 +15,8 @@ sp -3,2,25 3 0,255,255          # Cian
 sp 8,-1,23 3 255,0,255          # Magenta
 sp -8,-1,23 3 128,128,128       # Gris
 sp 0,-3,24 2 255,165,0          # Naranja
-sp 4,-2,21 2 0,128,0            # Verde oscuro
-sp -4,-2,21 2 0,0,128           # Azul oscuro
+sp 4,-2,21 2 0,128,0 checker            # Verde oscuro
+sp -4,-2,21 2 0,0,128 checker           # Azul oscuro
 
 # 8 cilindros
 cy 0,6,20 0,1,0 3 10 255,255,0   # Amarillo
@@ -25,6 +25,6 @@ cy -6,6,22 0,1,0 3 10 0,255,255  # Cian
 cy 3,7,24 0,1,0 2 8 128,0,0      # Rojo oscuro
 cy -3,7,24 0,1,0 2 8 0,128,128   # Azul verdoso
 cy 8,7,23 0,1,0 3 10 255,140,0   # Naranja
-cy -8,7,23 0,1,0 3 10 75,0,130   # Índigo
-cy 0,7,26 0,1,0 2 6 128,128,0    # Oliva
+cy -8,7,23 0,1,0 3 10 75,0,130 checker   # Índigo
+cy 0,7,26 0,1,0 2 6 128,128,0 checker    # Oliva
 
