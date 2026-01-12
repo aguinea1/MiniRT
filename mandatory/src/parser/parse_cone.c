@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguinea <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:21:06 by aguinea           #+#    #+#             */
-/*   Updated: 2025/06/30 20:27:11 by aguinea          ###   ########.fr       */
+/*   Updated: 2026/01/12 19:49:57 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int	print_errors(char **tokens, t_vec *position, t_vec *direction)
 		return (printf("Invalid cone angle or height\n"), 0);
 	if (!parse_vec(tokens[1], position) || !parse_vec(tokens[2], direction))
 		return (printf("Invalid cone vectors\n"), 0);
-	if (!vec_is_normalized(*direction))
-		return (printf("Cone direction must be normalized\n"), 0);
+//	if (!vec_is_normalized(*direction))
+//		return (printf("Cone direction must be normalized\n"), 0);
 	return (1);
 }
 
@@ -41,6 +41,8 @@ int	parse_cone(char **tokens, t_scene *scene)
 	cone = malloc(sizeof(t_cone));
 	if (!cone)
 		return (free_array(rgb), 0);
+	cone->position = position;
+	cone->direction = direction;
 	cone->angle = ft_atof(tokens[3]);
 	cone->height = ft_atof(tokens[4]);
 	cone->color.x = (float)atoi(rgb[0]);

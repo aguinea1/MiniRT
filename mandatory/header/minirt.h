@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 20:51:34 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:01:11 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define BUMP_P "bump"
 # define THREADS 12
 # define RGB_LIGHT "Error\nRGB values must be 0–255\n"
+# define M_PI 3.14159265358979323846
 
 //STRUCTS
 //lo q hay q hacer esta en el main

@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:37:13 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 18:52:24 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:35:13 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_vec	ray_color(t_vec dir, t_scene *scene)
 	color = vec_mul(obj_color, ambient);
 	return (light_loop(scene, hit, color));
 }
+
 
 void	put_pixel(t_mlx *mlx, int x, int y, int *rgb)
 {
