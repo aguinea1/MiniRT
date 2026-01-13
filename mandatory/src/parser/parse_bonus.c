@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:59:45 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 20:47:52 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:24:48 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	parse_bonus(char **tokens, char *figure)
 		else if (ft_strcmp(tokens[i], NOISE_P) == 0)
 			pattern |= 1 << 2;
 		else if (ft_strcmp(tokens[i], BUMP_P) == 0)
-			pattern = BUMP; //|= 1 << 3;
+			pattern = BUMP;
 		else if (tokens[i][0] != ' ' && tokens[i][0] != '\t')
 			return (printf("Warning: Unknown pattern '%s'\n", tokens[i]), -1);
 		if (i == max)

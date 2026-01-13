@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:56:00 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 20:56:15 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:04:50 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ t_hit	find_closest_cylinder(t_ray ray, t_list *cyls)
 	return (closest_hit);
 }
 
+static	t_vec	ft_icheck_pattern(t_cylinder *cy, t_hit *hit, t_vec n, int i)
+{
+	if (cy->pattern == BUMP)
+		hit->normal = ft_bump_normal(*hit, 0.3);
+	else if (i == 1)
+		hit->normal = vec_normalize(n);
+	if (cy->pattern == NONE || cy->pattern == BUMP)
+		return (cy->color);
+	else if (cy->pattern == CHECKER)
+		return (ft_checkerboard(*hit));
+	return (cy->color);
+}
+
 static void	check_cylinder_cap(t_ray ray, t_cylinder *cy,
 		t_vec axis, t_hit *hit)
 {
@@ -59,10 +72,7 @@ static void	check_cylinder_cap(t_ray ray, t_cylinder *cy,
 				{
 					hit->i = i;
 					hit_cylinder_cap(c_p[1], hit, t_de[0], axis);
-					if (cy->pattern == NONE || cy->pattern == BUMP)
-						hit->color = cy->color;
-					else if (cy->pattern == CHECKER)
-						hit->color = ft_checkerboard(*hit);
+					hit->color = ft_icheck_pattern(cy, hit, c_p[1], 0);
 				}
 			}
 		}
@@ -93,14 +103,7 @@ static void	intersect_cylinder_body(t_ray ray, t_cylinder *cy,
 		hit->t = t;
 		hit->point = p[0];
 		n = vec_sub(p[1], vec_scale(d->axis, h));
-		if (cy->pattern == BUMP)
-			hit->normal = ft_bump_normal(*hit, 0.3);
-		else
-			hit->normal = vec_normalize(n);
-		if (cy->pattern == NONE || cy->pattern == BUMP)
-			hit->color = cy->color;
-		else if (cy->pattern == CHECKER)
-			hit->color = ft_checkerboard(*hit);
+		hit->color = ft_icheck_pattern(cy, hit, n, 1);
 	}
 }
 

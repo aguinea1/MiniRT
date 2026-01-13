@@ -6,15 +6,12 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:37:13 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/09 20:35:13 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:14:18 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-//en esta funcion es dnd tienes que meter las otras figuras en pln
-//(find_closest_cone) y entonces ahi ya hace todos los calculos
-//como en hit_cylinder o como quieras
-//(y el bonus ni puta idea dnd meterlo en verdad)
+
 static t_hit	find_closest_hit(t_ray ray, t_scene *scene)
 {
 	t_hit	sphere;
@@ -35,12 +32,7 @@ static t_hit	find_closest_hit(t_ray ray, t_scene *scene)
 		return (sphere);
 	}
 	if (cyl.hit)
-	{
-		cyl.normal = vec_normalize(cyl.normal);
-		if (vec_dot(ray.direction, cyl.normal) > 0)
-			cyl.normal = vec_scale(cyl.normal, -1);
 		return (cyl);
-	}
 	if (cone.hit)
 		return (cone);
 	if (plane.hit)
@@ -89,7 +81,6 @@ t_vec	ray_color(t_vec dir, t_scene *scene)
 	color = vec_mul(obj_color, ambient);
 	return (light_loop(scene, hit, color));
 }
-
 
 void	put_pixel(t_mlx *mlx, int x, int y, int *rgb)
 {

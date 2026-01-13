@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:59:42 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 20:49:27 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:20:07 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,31 @@ static void	complete_abc(t_ray ray, t_sphere *sphere, double *abc, t_vec oc)
 
 t_vec	ft_checkerboard(t_hit hit)
 {
-	int	check;
+	int		check;
 	double	scale;
 
-	scale = 1.0; // tamaño de los cuadrados
+	scale = 1.0;
 	check = (int)(floor(hit.point.x * scale)
 			+ floor(hit.point.y * scale)
 			+ floor(hit.point.z * scale)) % 2;
-
 	if (check == 0)
 		return (vec(255, 255, 255));
 	else
 		return (vec(0, 0, 0));
+}
+
+static	t_vec	ft_icheck_pattern(t_sphere *sphere, t_hit *hit)
+{
+	if (sphere->pattern == BUMP)
+		hit->normal = ft_bump_normal(*hit, 0.3);
+	else
+		hit->normal = vec_normalize
+			(vec_normalize(vec_sub(hit->point, sphere->center)));
+	if (sphere->pattern == NONE || sphere->pattern == BUMP)
+		return (sphere->color);
+	else if (sphere->pattern == CHECKER)
+		return (ft_checkerboard(*hit));
+	return (sphere->color);
 }
 
 t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
@@ -67,14 +80,7 @@ t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
 	hit.hit = 1;
 	hit.t = t;
 	hit.point = vec_add(ray.origin, vec_scale(ray.direction, t));
-	if (sphere->pattern == BUMP)
-		hit.normal = ft_bump_normal(hit, 0.3);
-	else
-		hit.normal = vec_normalize(vec_sub(hit.point, sphere->center));
-	if (sphere->pattern == NONE || sphere->pattern == BUMP)
-		hit.color = sphere->color;
-	else if (sphere->pattern == CHECKER)
-		hit.color = ft_checkerboard(hit);
+	hit.color = ft_icheck_pattern(sphere, &hit);
 	return (hit);
 }
 

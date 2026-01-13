@@ -6,11 +6,24 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:35:51 by lbellmas          #+#    #+#             */
-/*   Updated: 2026/01/08 20:52:02 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:11:49 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
+
+static	t_vec	ft_icheck_pattern(t_plane *plane, t_hit *hit)
+{
+	if (plane->pattern == BUMP)
+		hit->normal = ft_bump_normal(*hit, 0.3);
+	else
+		hit->normal = plane->normal;
+	if (plane->pattern == NONE || plane->pattern == BUMP)
+		return (plane->color);
+	else if (plane->pattern == CHECKER)
+		return (ft_checkerboard(*hit));
+	return (plane->color);
+}
 
 t_hit	hit_plane(t_ray ray, t_plane *plane)
 {
@@ -20,31 +33,18 @@ t_hit	hit_plane(t_ray ray, t_plane *plane)
 	t_vec	p0_to_origin;
 
 	hit.hit = 0;
-
-	// Asegúrate que la normal está normalizada
 	plane->normal = vec_normalize(plane->normal);
-
 	denom = vec_dot(ray.direction, plane->normal);
-	if (fabs(denom) < 1e-6) // El rayo es casi paralelo
+	if (fabs(denom) < 1e-6)
 		return (hit);
-
 	p0_to_origin = vec_sub(plane->position, ray.origin);
 	t = vec_dot(p0_to_origin, plane->normal) / denom;
-
 	if (t < 0)
-		return (hit); // El plano está detrás del origen del rayo
-
+		return (hit);
 	hit.hit = 1;
 	hit.t = t;
 	hit.point = vec_add(ray.origin, vec_scale(ray.direction, t));
-	if (plane->pattern == BUMP)
-		hit.normal = ft_bump_normal(hit, 0.3);
-	else
-		hit.normal = plane->normal;
-	if (plane->pattern == NONE || plane->pattern == BUMP)
-		hit.color = plane->color;
-	else if (plane->pattern == CHECKER)
-		hit.color = ft_checkerboard(hit);
+	hit.color = ft_icheck_pattern(plane, &hit);
 	return (hit);
 }
 

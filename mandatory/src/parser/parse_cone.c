@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:21:06 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/12 19:49:57 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:27:45 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ static int	print_errors(char **tokens, t_vec *position, t_vec *direction)
 //	if (!vec_is_normalized(*direction))
 //		return (printf("Cone direction must be normalized\n"), 0);
 	return (1);
+}
+
+static	void	ft_set_color(t_cone *cone, char **rgb)
+{
+	cone->color.x = (float)atoi(rgb[0]);
+	cone->color.y = (float)atoi(rgb[1]);
+	cone->color.z = (float)atoi(rgb[2]);
 }
 
 int	parse_cone(char **tokens, t_scene *scene)
@@ -45,9 +52,7 @@ int	parse_cone(char **tokens, t_scene *scene)
 	cone->direction = direction;
 	cone->angle = ft_atof(tokens[3]);
 	cone->height = ft_atof(tokens[4]);
-	cone->color.x = (float)atoi(rgb[0]);
-	cone->color.y = (float)atoi(rgb[1]);
-	cone->color.z = (float)atoi(rgb[2]);
+	ft_set_color(cone, rgb);
 	pattern = parse_bonus(tokens, "cones");
 	if (pattern == -1)
 		return (free_array(rgb), ft_lstadd_back(&scene->cones,

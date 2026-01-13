@@ -6,14 +6,12 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:17:05 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/08 18:03:01 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:23:52 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-// la variable background tiene dos[2],
-// cada una pa un color pq le he metido difuminacion
-// pero vaya pon el q te salga de los huevos
+
 t_vec	ray_back(t_ray ray)
 {
 	t_vec	background[2];
@@ -33,18 +31,14 @@ t_vec	reflect(t_vec L, t_vec N)
 
 t_vec	calculate_specular(t_hit hit, t_light *light, t_scene *scene)
 {
-	t_vec	L;
-	t_vec	V;
-	t_vec	R;
+	t_vec	lvr[3];
 	double	spec;
 	t_vec	light_color;
 
-	L = vec_normalize(vec_sub(light->position, hit.point));
-	V = vec_normalize(vec_sub(scene->camera.position, hit.point));
-	R = reflect(vec_scale(L, -1), hit.normal);
-
-	spec = pow(fmax(vec_dot(R, V), 0.0), hit.shininess);
-
+	lvr[0] = vec_normalize(vec_sub(light->position, hit.point));
+	lvr[1] = vec_normalize(vec_sub(scene->camera.position, hit.point));
+	lvr[2] = reflect(vec_scale(lvr[0], -1), hit.normal);
+	spec = pow(fmax(vec_dot(lvr[2], lvr[1]), 0.0), hit.shininess);
 	light_color = vec_scale(light->color, light->brightness);
 	return (vec_scale(light_color, spec * hit.ks));
 }
