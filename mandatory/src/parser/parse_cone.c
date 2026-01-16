@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:21:06 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/13 21:27:45 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/16 17:24:19 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static int	print_errors(char **tokens, t_vec *position, t_vec *direction)
 		return (printf("Invalid cone angle or height\n"), 0);
 	if (!parse_vec(tokens[1], position) || !parse_vec(tokens[2], direction))
 		return (printf("Invalid cone vectors\n"), 0);
-//	if (!vec_is_normalized(*direction))
-//		return (printf("Cone direction must be normalized\n"), 0);
 	return (1);
 }
 

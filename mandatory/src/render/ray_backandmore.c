@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:17:05 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/13 21:23:52 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:50:14 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,31 @@ t_vec	calculate_specular(t_hit hit, t_light *light, t_scene *scene)
 
 t_vec	light_loop(t_scene *scene, t_hit hit, t_vec color)
 {
-	t_vec	total_light;
+	t_vec	total_light[2];
 	t_list	*curr;
 	t_light	*light;
 	t_vec	light_contrib;
 	t_vec	ambient_plus_current;
-	t_vec	specular;
 
-	total_light = vec(0, 0, 0);
-	specular = vec(0, 0, 0);
+	total_light[0] = vec(0, 0, 0);
+	total_light[1] = vec(0, 0, 0);
 	curr = scene->light;
 	while (curr)
 	{
 		light = (t_light *)curr->content;
 		light_contrib = calculate_light(hit, light, scene);
-		specular = vec_add(specular, calculate_specular(hit, light, scene));
-		ambient_plus_current = vec_add(color, total_light);
+		total_light[1] = vec_add(total_light[1],
+				calculate_specular(hit, light, scene));
+		ambient_plus_current = vec_add(color, total_light[0]);
 		if (light_contrib.x > ambient_plus_current.x)
-			total_light.x += light_contrib.x - ambient_plus_current.x;
+			total_light[0].x += light_contrib.x - ambient_plus_current.x;
 		if (light_contrib.y > ambient_plus_current.y)
-			total_light.y += light_contrib.y - ambient_plus_current.y;
+			total_light[0].y += light_contrib.y - ambient_plus_current.y;
 		if (light_contrib.z > ambient_plus_current.z)
-			total_light.z += light_contrib.z - ambient_plus_current.z;
+			total_light[0].z += light_contrib.z - ambient_plus_current.z;
 		curr = curr->next;
 	}
-	return (vec_add(vec_add(color, total_light), specular));
+	return (vec_add(vec_add(color, total_light[0]), total_light[1]));
 }
 
 double	calculate_lightdir(t_hit hit, t_ray *shadow_ray, t_light *light)

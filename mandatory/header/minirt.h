@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:32 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/09 18:01:11 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/16 17:27:04 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,18 @@ typedef struct s_cone
 	t_pattern	pattern;
 }	t_cone;
 
+typedef struct s_cone_data
+{
+	t_vec	axis;
+	t_vec	oc;
+	double	k;
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+	double	sqrt_disc;	
+}	t_cone_data;
+
 typedef struct s_scene
 {
 	t_ambient	ambient;
@@ -229,6 +241,15 @@ t_hit	find_closest_cone(t_ray ray, t_list *list);
 t_hit	hit_plane(t_ray ray, t_plane *plane);
 t_vec	ft_checkerboard(t_hit hit);
 t_vec	ft_bump_normal(t_hit hit, double strength);
+void	intersect_cone_body(t_ray ray, t_cone *co,
+			t_cone_data *d, t_hit *hit);
+int		prepare_cone_data(t_ray ray, t_cone *co, t_cone_data *out);
+t_hit	hit_cone(t_ray ray, t_cone *co);
+t_vec	ft_ccheck_pattern(t_cone *co, t_hit *hit, t_vec n);
+void	ft_set_hit(t_hit *hit, double t, t_vec p);
+double	ft_set_t(t_cone_data *d, int i);
+void	check_cone_cap(t_ray ray, t_cone *co,
+			t_vec axis, t_hit *hit);
 
 //THREADS
 void	create_threads(t_scene *scene, t_vec *views, t_mlx *mlx);

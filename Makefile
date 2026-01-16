@@ -57,7 +57,9 @@ SRCS = $(SRCDIR)/main/main.c 					\
 	   $(SRCDIR)/vec_op/vec_op3.c				\
 	   $(SRCDIR)/render/ray_backandmore.c		\
 	   $(SRCDIR)/utils/utils_parser.c			\
-	   $(SRCDIR)/utils/utils_cylinder.c
+	   $(SRCDIR)/utils/utils_cylinder.c			\
+	   $(SRCDIR)/render/hit_normie.c			\
+	   $(SRCDIR)/render/hit_cone2.c
 
 
 LIBFT_SRCS = \

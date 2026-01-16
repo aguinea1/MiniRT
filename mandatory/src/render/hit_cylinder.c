@@ -6,36 +6,11 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:56:00 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/13 21:04:50 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:59:39 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minirt.h"
-
-t_hit	find_closest_cylinder(t_ray ray, t_list *cyls)
-{
-	t_hit		closest_hit;
-	t_hit		current_hit;
-	double		min_t;
-	t_cylinder	*cyl;
-
-	closest_hit.hit = 0;
-	min_t = INFINITY;
-	while (cyls)
-	{
-		cyl = (t_cylinder *)cyls->content;
-		current_hit = hit_cylinder(ray, cyl);
-		if (current_hit.hit && current_hit.t < min_t)
-		{
-			min_t = current_hit.t;
-			closest_hit = current_hit;
-		}
-		cyls = cyls->next;
-	}
-	closest_hit.ks = 0.5;
-	closest_hit.shininess = 32;
-	return (closest_hit);
-}
 
 static	t_vec	ft_icheck_pattern(t_cylinder *cy, t_hit *hit, t_vec n, int i)
 {

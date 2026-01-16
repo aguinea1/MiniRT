@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:59:42 by aguinea           #+#    #+#             */
-/*   Updated: 2026/01/13 21:20:07 by lbellmas         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:59:44 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,6 @@ static void	complete_abc(t_ray ray, t_sphere *sphere, double *abc, t_vec oc)
 	abc[0] = vec_dot(ray.direction, ray.direction);
 	abc[1] = 2.0 * vec_dot(oc, ray.direction);
 	abc[2] = vec_dot(oc, oc) - powf(sphere->diameter / 2, 2);
-}
-
-t_vec	ft_checkerboard(t_hit hit)
-{
-	int		check;
-	double	scale;
-
-	scale = 1.0;
-	check = (int)(floor(hit.point.x * scale)
-			+ floor(hit.point.y * scale)
-			+ floor(hit.point.z * scale)) % 2;
-	if (check == 0)
-		return (vec(255, 255, 255));
-	else
-		return (vec(0, 0, 0));
 }
 
 static	t_vec	ft_icheck_pattern(t_sphere *sphere, t_hit *hit)
